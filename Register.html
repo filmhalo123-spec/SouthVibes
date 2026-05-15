@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">สมัครสมาชิกฟรี | SouthVibes</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Merriweather', serif; }
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.2) inset !important;
+            -webkit-text-fill-color: white !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        /* Toast notification */
+        #toast {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: translateY(80px);
+            opacity: 0;
+        }
+        #toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-900 selection:bg-blue-300 selection:text-blue-900">
+
+    <div class="absolute top-6 right-6 z-50 flex items-center gap-2 text-sm font-bold text-white/60 bg-black/30 px-4 py-2 rounded-full backdrop-blur-md border border-white/10 shadow-lg">
+        <i data-lucide="globe" class="h-4 w-4 text-white"></i>
+        <button id="btn-th" class="hover:text-white transition-colors text-white">TH</button>
+        <span class="text-white/30">/</span>
+        <button id="btn-en" class="hover:text-white transition-colors">EN</button>
+    </div>
+
+    <div class="relative min-h-screen flex items-center justify-center p-4">
+        <div class="absolute inset-0 w-full h-full overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=2000&auto=format&fit=crop" 
+                 alt="Beautiful Andaman Sea Background" 
+                 class="w-full h-full object-cover transform scale-105" />
+            <div class="absolute inset-0 bg-gray-900/50"></div>
+        </div>
+
+        <div class="relative z-10 w-full max-w-md py-8">
+            <div class="flex justify-between items-center mb-8">
+                <a href="#" onclick="history.back(); return false;" class="flex items-center gap-2 text-white/80 hover:text-white transition-colors cursor-pointer group">
+                    <i data-lucide="arrow-left" class="h-5 w-5 group-hover:-translate-x-1 transition-transform"></i>
+                    <span class="text-sm font-medium" data-i18n="back">ย้อนกลับ</span>
+                </a>
+                <div class="flex items-center gap-2">
+                    <div class="bg-blue-600 text-white p-1.5 rounded-full">
+                        <i data-lucide="compass" class="h-5 w-5"></i>
+                    </div>
+                    <span class="font-serif font-bold text-xl tracking-tight text-white">
+                        South<span class="text-blue-400">Vibes</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-xl border border-white/20 p-8 sm:p-10 rounded-3xl shadow-2xl">
+                
+                <h1 class="text-3xl font-serif font-bold text-white mb-2" data-i18n="title">สร้างบัญชีใหม่</h1>
+                <p class="text-white/70 text-sm mb-8" data-i18n="subtitle">เข้าร่วมชุมชนนักเดินทางและเริ่มแบ่งปันเรื่องราวของคุณ</p>
+
+                <form id="registerForm" class="space-y-5">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-white/90 mb-1.5" data-i18n="userLabel">ชื่อผู้ใช้งาน (Username)</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i data-lucide="user" class="h-5 w-5 text-white/50"></i>
+                            </div>
+                            <input type="text" id="username" required
+                                   class="block w-full pl-11 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-white/20 transition-all" 
+                                   placeholder="Traveller2026" data-i18n-placeholder="userPlaceholder">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-white/90 mb-1.5" data-i18n="emailLabel">อีเมล</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i data-lucide="mail" class="h-5 w-5 text-white/50"></i>
+                            </div>
+                            <input type="email" id="email" required
+                                   class="block w-full pl-11 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-white/20 transition-all" 
+                                   placeholder="you@example.com" data-i18n-placeholder="emailPlaceholder">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-white/90 mb-1.5" data-i18n="passLabel">รหัสผ่าน</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i data-lucide="lock" class="h-5 w-5 text-white/50"></i>
+                            </div>
+                            <input type="password" id="password" required
+                                   class="block w-full pl-11 pr-10 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-white/20 transition-all" 
+                                   placeholder="••••••••" data-i18n-placeholder="passPlaceholder">
+                            <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-4 flex items-center text-white/50 hover:text-white/90 transition-colors">
+                                <i data-lucide="eye" id="eyeIcon" class="h-5 w-5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn"
+                        class="w-full flex justify-center items-center gap-2 py-3.5 px-4 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-blue-500 transition-colors mt-6 disabled:opacity-60 disabled:cursor-not-allowed">
+                        <span id="btnText" data-i18n="regBtn">สมัครสมาชิก</span>
+                        <i data-lucide="loader-2" id="loadingIcon" class="h-5 w-5 animate-spin hidden"></i>
+                    </button>
+                </form>
+
+                <div class="mt-8 mb-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-white/20"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-3 bg-transparent text-white/60" data-i18n="or">หรือสมัครด้วยบัญชี</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="mt-8 text-center text-sm text-white/70">
+                    <span data-i18n="hasAcc">มีบัญชีผู้ใช้อยู่แล้วใช่ไหม?</span> 
+                    <a href="Login.html" class="font-bold text-blue-300 hover:text-blue-200 transition-colors" data-i18n="loginLink">เข้าสู่ระบบที่นี่</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-5 py-3.5 rounded-2xl shadow-2xl text-sm font-semibold text-white min-w-[260px] max-w-xs">
+        <i id="toastIcon" class="h-5 w-5 shrink-0"></i>
+        <span id="toastMsg"></span>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // ══════════════════════════════════════════════════════
+        //  ⚙️ ใส่ URL ของ Google Apps Script Web App ที่นี่
+        // ══════════════════════════════════════════════════════
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx9TbfDler6EqXCAXpEF6Zc-sK-jjTUgNu2crFKJ9JktboRRLUxtonPrYjPdkJfdYdiJA/exec';
+        // ══════════════════════════════════════════════════════
+
+        // --- ระบบแปลภาษา ---
+        const TRANSLATIONS = {
+            TH: {
+                pageTitle: 'สมัครสมาชิกฟรี | SouthVibes',
+                back: 'ย้อนกลับ', title: 'สร้างบัญชีใหม่',
+                subtitle: 'เข้าร่วมชุมชนนักเดินทางและเริ่มแบ่งปันเรื่องราวของคุณ',
+                userLabel: 'ชื่อผู้ใช้งาน (Username)', userPlaceholder: 'Traveller2026',
+                emailLabel: 'อีเมล', emailPlaceholder: 'you@example.com',
+                passLabel: 'รหัสผ่าน', passPlaceholder: '••••••••',
+                regBtn: 'สมัครสมาชิก', or: 'หรือสมัครด้วยบัญชี',
+                hasAcc: 'มีบัญชีผู้ใช้อยู่แล้วใช่ไหม?', loginLink: 'เข้าสู่ระบบที่นี่',
+                loading: 'กำลังสร้างบัญชี...',
+                successMsg: 'สมัครสมาชิกสำเร็จ! ยินดีต้อนรับสู่ SouthVibes 🎉',
+                errorMsg: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาลองใหม่อีกครั้ง'
+            },
+            EN: {
+                pageTitle: 'Sign Up Free | SouthVibes',
+                back: 'Go Back', title: 'Create New Account',
+                subtitle: 'Join the traveler community and share your stories.',
+                userLabel: 'Username', userPlaceholder: 'Traveller2026',
+                emailLabel: 'Email Address', emailPlaceholder: 'you@example.com',
+                passLabel: 'Password', passPlaceholder: '••••••••',
+                regBtn: 'Sign Up', or: 'Or sign up with',
+                hasAcc: 'Already have an account?', loginLink: 'Sign in here',
+                loading: 'Creating account...',
+                successMsg: 'Registration successful! Welcome to SouthVibes 🎉',
+                errorMsg: 'Cannot connect to server. Please try again.'
+            }
+        };
+
+        let currentLang = localStorage.getItem('southvibes_lang') || 'TH';
+
+        function updateApp() {
+            const t = TRANSLATIONS[currentLang];
+            document.title = t.pageTitle;
+
+            // แปลข้อความ
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.textContent = t[key];
+            });
+
+            // แปล placeholder
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (t[key]) el.placeholder = t[key];
+            });
+
+            // Active language button
+            document.getElementById('btn-th').className = `hover:text-white transition-colors ${currentLang === 'TH' ? 'text-white' : 'text-white/50'}`;
+            document.getElementById('btn-en').className = `hover:text-white transition-colors ${currentLang === 'EN' ? 'text-white' : 'text-white/50'}`;
+        }
+
+        document.getElementById('btn-th').addEventListener('click', () => {
+            currentLang = 'TH';
+            localStorage.setItem('southvibes_lang', 'TH');
+            updateApp();
+        });
+        document.getElementById('btn-en').addEventListener('click', () => {
+            currentLang = 'EN';
+            localStorage.setItem('southvibes_lang', 'EN');
+            updateApp();
+        });
+
+        updateApp();
+
+        // --- Toggle Password Visibility ---
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const input = document.getElementById('password');
+            const icon = document.getElementById('eyeIcon');
+            const isHidden = input.type === 'password';
+            input.type = isHidden ? 'text' : 'password';
+            icon.setAttribute('data-lucide', isHidden ? 'eye-off' : 'eye');
+            lucide.createIcons();
+        });
+
+        // --- Toast Notification ---
+        let toastTimer;
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            const toastIcon = document.getElementById('toastIcon');
+
+            const config = {
+                success: { bg: 'bg-emerald-500', icon: 'check-circle' },
+                error:   { bg: 'bg-rose-500',    icon: 'x-circle' },
+                info:    { bg: 'bg-blue-500',    icon: 'info' }
+            };
+
+            const { bg, icon } = config[type] || config.info;
+
+            // Reset classes
+            toast.className = toast.className.replace(/bg-\w+-\d+/g, '');
+            toast.classList.add(bg, 'fixed', 'bottom-6', 'left-1/2', '-translate-x-1/2', 'z-50',
+                'flex', 'items-center', 'gap-3', 'px-5', 'py-3.5', 'rounded-2xl',
+                'shadow-2xl', 'text-sm', 'font-semibold', 'text-white', 'min-w-[260px]', 'max-w-xs');
+
+            toastMsg.textContent = message;
+            toastIcon.setAttribute('data-lucide', icon);
+            lucide.createIcons();
+
+            toast.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+
+        // --- Form Submit → Apps Script ---
+        document.getElementById('registerForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const t = TRANSLATIONS[currentLang];
+            const username = document.getElementById('username').value.trim();
+            const email    = document.getElementById('email').value.trim();
+            const passwordField = document.getElementById('password');
+            const password = passwordField.value;
+
+            // ดึงปุ่มและไอคอนสดๆ จาก DOM
+            const btnText   = document.getElementById('btnText');
+            const submitBtn = document.getElementById('submitBtn');
+            const loadingIcon = document.getElementById('loadingIcon');
+
+            // 🟢 เริ่มสถานะ Loading
+            btnText.textContent = t.loading;
+            loadingIcon.classList.remove('hidden');
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'register', username, email, password })
+                });
+
+                const result = await response.json();
+
+                if (result.success === true) {
+                    showToast(t.successMsg, 'success');
+                    e.target.reset(); // ล้างฟอร์มทั้งหมด
+                    setTimeout(() => history.back(), 2000);
+                } else {
+                    // ❌ กรณีสมัครไม่ผ่าน (เช่น อีเมลซ้ำ)
+                    showToast(result.message || t.errorMsg, 'error');
+                    
+                    // 🟢 ล้างช่องรหัสผ่าน และ คืนสถานะปุ่ม
+                    passwordField.value = '';
+                    document.getElementById('btnText').textContent = t.regBtn;
+                    document.getElementById('loadingIcon').classList.add('hidden');
+                    document.getElementById('submitBtn').disabled = false;
+                }
+
+            } catch (error) {
+                // ❌ กรณีเชื่อมต่อเซิร์ฟเวอร์ไม่ได้
+                console.error('Error:', error);
+                showToast(t.errorMsg, 'error');
+                
+                // 🟢 ล้างช่องรหัสผ่าน และ คืนสถานะปุ่ม
+                passwordField.value = '';
+                document.getElementById('btnText').textContent = t.regBtn;
+                document.getElementById('loadingIcon').classList.add('hidden');
+                document.getElementById('submitBtn').disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

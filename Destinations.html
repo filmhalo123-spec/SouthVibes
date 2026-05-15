@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จุดหมายปลายทาง | SouthVibes</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Merriweather', serif; }
+        
+        /* Custom image zoom effect for gallery */
+        .img-zoom-container {
+            overflow: hidden;
+            position: relative;
+        }
+        .img-zoom-container img {
+            transition: transform 0.7s ease;
+        }
+        .img-zoom-container:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Custom Scrollbar for Modal */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-white text-gray-900 selection:bg-blue-200">
+
+    <nav class="border-b border-gray-200 sticky top-0 bg-white z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+            
+                  <a href="index.html" class="flex items-center gap-2 cursor-pointer group">
+                    <div class="bg-blue-600 text-white p-2 rounded-full group-hover:bg-blue-700 transition-colors">
+                        <i data-lucide="compass" class="h-6 w-6"></i>
+                    </div>
+                    <span class="font-serif font-bold text-2xl tracking-tight text-gray-900">
+                        South<span class="text-blue-600">Vibes</span>
+                    </span>
+                </a>
+            
+
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="nav-link text-base font-bold tracking-wide text-gray-900 hover:text-blue-600 transition-colors uppercase" data-i18n="nav1">แนะนำสถานที่</a>
+                    <a href="Destination.html" class="nav-link text-base font-bold tracking-wide text-blue-600 border-b-2 border-blue-600 pb-1 uppercase" data-i18n="nav2">จุดหมาย</a>
+                    <a href="Community.html" class="nav-link text-base font-bold tracking-wide text-gray-900 hover:text-blue-600 transition-colors uppercase" data-i18n="nav3">ชุมชน</a>
+                    <a href="Atcs.html" class="nav-link text-base font-bold tracking-wide text-gray-900 hover:text-blue-600 transition-colors uppercase" data-i18n="nav4">บทความ</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div class="hidden sm:flex items-center gap-2 text-sm font-bold text-gray-400 mr-2">
+                        <i data-lucide="globe" class="h-4 w-4 text-gray-900"></i>
+                        <button id="btn-th" class="hover:text-blue-600 transition-colors text-gray-900">TH</button>
+                        <span>/</span>
+                        <button id="btn-en" class="hover:text-blue-600 transition-colors">EN</button>
+                    </div>
+                    
+                    <a id="nav-btn-login" href="Login.html" class="bg-blue-600 text-white px-5 py-2.5 rounded-full text-sm font-bold tracking-wide hover:bg-blue-700 transition-colors" data-i18n="login">
+                        เข้าสู่ระบบ
+                    </a>
+
+                    <div id="nav-user-profile" class="hidden items-center gap-3">
+                        <a href="profile.html" class="flex items-center gap-2 bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200 cursor-pointer hover:bg-gray-200 transition-colors" title="แก้ไขโปรไฟล์">
+                            <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex justify-center items-center font-bold text-sm overflow-hidden" id="user-avatar">S</div>
+                            <span class="font-bold text-sm text-gray-800 hidden md:block mr-2" id="user-name-display"></span>
+                        </a>
+                        <button onclick="logout()" class="text-sm font-bold text-red-500 hover:text-red-700 transition-colors bg-red-50 px-3 py-2 rounded-full hover:bg-red-100">
+                            ออกจากระบบ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="relative w-full h-[60vh] min-h-[400px]">
+        <img src="https://amitydivingclub.com/wp-content/uploads/2021/11/%E0%B8%94%E0%B8%B3%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%94%E0%B8%B9%E0%B8%9B%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%B1%E0%B8%87-1.jpg" 
+             alt="Southern Thailand Landscape" class="w-full h-full object-cover"/>
+        <div class="absolute inset-0 bg-gray-900/40 flex flex-col justify-center items-center text-center px-4">
+            <h1 class="text-4xl md:text-6xl font-serif font-bold text-white mb-4 drop-shadow-lg" data-i18n="destHeroTitle">
+                ออกเดินทางสู่แดนใต้
+            </h1>
+            <p class="text-lg md:text-xl text-white/90 font-medium max-w-2xl drop-shadow-md" data-i18n="destHeroSub">
+                สัมผัสมนต์เสน่ห์แห่งท้องทะเล วัฒนธรรมที่หลากหลาย และรสชาติอาหารที่คุณจะไม่ลืม
+            </p>
+        </div>
+    </div>
+
+    <div class="bg-gray-50 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-sm font-bold tracking-widest text-blue-600 uppercase mb-3" data-i18n="ourStoryLabel">เรื่องราวของเรา</h2>
+                    <h3 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6 leading-tight" data-i18n="purposeTitle">
+                        ทำไมเราถึงสร้าง SouthVibes?
+                    </h3>
+                    <p class="text-gray-600 text-lg mb-8 leading-relaxed" data-i18n="purposeDesc">
+                        ภาคใต้ของไทยไม่ได้มีแค่ภาพจำของทะเลที่สวยงามเท่านั้น แต่ยังเต็มไปด้วยเรื่องราว วิถีชีวิต ศิลปวัฒนธรรม และร้านอาหารลับๆ ที่รอให้คุณไปค้นพบ 
+                        <br><br>
+                        เราสร้าง <strong>SouthVibes</strong> ขึ้นมาเพื่อเป็น "พื้นที่ส่วนกลาง" ให้เหล่าผู้รักการเดินทางได้มารวมตัวกัน แบ่งปันแพลนทริป แลกเปลี่ยนประสบการณ์ และสร้างแรงบันดาลใจให้กันและกัน ไม่ว่าคุณจะเป็นสายลุยแบกเป้ สายคาเฟ่ หรือนักดำน้ำ คุณก็คือส่วนหนึ่งของการเดินทางนี้
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-blue-100 text-blue-600 p-3 rounded-xl shrink-0"><i data-lucide="map" class="h-6 w-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1" data-i18n="val1Title">สำรวจที่เที่ยวลับ</h4>
+                                <p class="text-sm text-gray-600" data-i18n="val1Desc">ค้นหาจุดหมายที่อยู่นอกไกด์บุ๊กทั่วไป</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-blue-100 text-blue-600 p-3 rounded-xl shrink-0"><i data-lucide="users" class="h-6 w-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1" data-i18n="val2Title">คอมมูนิตี้ที่อบอุ่น</h4>
+                                <p class="text-sm text-gray-600" data-i18n="val2Desc">พูดคุยและขอคำแนะนำจากคนในพื้นที่</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-blue-100 text-blue-600 p-3 rounded-xl shrink-0"><i data-lucide="book-open" class="h-6 w-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1" data-i18n="val3Title">แบ่งปันเรื่องราว</h4>
+                                <p class="text-sm text-gray-600" data-i18n="val3Desc">เขียนรีวิวและสร้างแรงบันดาลใจให้ผู้อื่น</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-blue-100 text-blue-600 p-3 rounded-xl shrink-0"><i data-lucide="calendar" class="h-6 w-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1" data-i18n="val4Title">วางแผนง่ายขึ้น</h4>
+                                <p class="text-sm text-gray-600" data-i18n="val4Desc">เก็บข้อมูลและสร้างทริปในแบบของคุณ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative h-[600px] w-full hidden md:block">
+                    <img src="https://cms.dmpcdn.com/travel/2026/01/21/2462e8e0-f694-11f0-bb4a-23d9551b2ff7_webp_original.webp" 
+                         alt="Phuket Old Town" class="absolute top-0 right-0 w-2/3 h-[350px] object-cover rounded-2xl shadow-2xl z-10 border-4 border-white" />
+                    <img src="https://thecfim.com/wp-content/uploads/2022/04/4bff77c42fa043749418e5df2d4b7816.jpg" 
+                         alt="Snorkeling" class="absolute bottom-0 left-0 w-2/3 h-[350px] object-cover rounded-2xl shadow-xl z-20 border-4 border-white" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4" data-i18n="galleryTitle">ประวัติสถานที่ต่างๆ</h2>
+            <p class="text-gray-600 text-lg" data-i18n="gallerySub">คลิกที่รูปภาพเพื่อเจาะลึกเรื่องราวและประวัติศาสตร์ของแต่ละพื้นที่</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]">
+            
+            <a href="#" onclick="openHistoryModal('phuket'); return false;" class="md:col-span-2 md:row-span-2 img-zoom-container rounded-2xl shadow-md group relative block w-full h-full cursor-pointer">
+                <img src="https://blog-static.kkday.com/th/blog/wp-content/uploads/P03000014_1-1024x683.jpeg" alt="Phuket" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-8">
+                    <h3 class="text-3xl font-serif font-bold text-white mb-2" data-i18n="provPhuket">ภูเก็ต</h3>
+                    <p class="text-white/80 font-medium" data-i18n="provPhuketSub">ไข่มุกอันดามัน เมืองเก่า และสีสันยามค่ำคืน</p>
+                </div>
+            </a>
+
+            <a href="#" onclick="openHistoryModal('krabi'); return false;" class="md:col-span-1 md:row-span-1 img-zoom-container rounded-2xl shadow-md group relative block w-full h-full cursor-pointer">
+                <img src="https://img.wongnai.com/p/624x0/2020/08/28/707a10fbdb954dee964989b514009dd2.jpg" alt="Krabi" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-6">
+                    <h3 class="text-2xl font-serif font-bold text-white mb-1" data-i18n="provKrabi">กระบี่</h3>
+                    <p class="text-white/80 text-sm font-medium" data-i18n="provKrabiSub">สวรรค์ของนักปีนผาและหมู่เกาะ</p>
+                </div>
+            </a>
+
+            <a href="#" onclick="openHistoryModal('surat'); return false;" class="md:col-span-1 md:row-span-1 img-zoom-container rounded-2xl shadow-md group relative block w-full h-full cursor-pointer">
+                <img src="https://img.kapook.com/u/2020/supattra_wat/surat/s1.jpg" alt="Surat Thani" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-6">
+                    <h3 class="text-2xl font-serif font-bold text-white mb-1" data-i18n="provSurat">สุราษฎร์ธานี</h3>
+                    <p class="text-white/80 text-sm font-medium" data-i18n="provSuratSub">เมืองร้อยเกาะ ป่าฝนที่สมบูรณ์</p>
+                </div>
+            </a>
+
+            <a href="#" onclick="openHistoryModal('songkhla'); return false;" class="md:col-span-1 md:row-span-1 img-zoom-container rounded-2xl shadow-md group relative block w-full h-full cursor-pointer">
+                <img src="https://s359.kapook.com/pagebuilder/4e7f48d8-252d-4c5f-a0bb-8e10a9ad48b4.jpg" alt="Songkhla" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-6">
+                    <h3 class="text-2xl font-serif font-bold text-white mb-1" data-i18n="provSongkhla">สงขลา</h3>
+                    <p class="text-white/80 text-sm font-medium" data-i18n="provSongkhlaSub">มนต์เสน่ห์เมืองสองทะเลและตึกเก่า</p>
+                </div>
+            </a>
+
+            <a href="#" onclick="openHistoryModal('phangnga'); return false;" class="md:col-span-2 md:row-span-1 img-zoom-container rounded-2xl shadow-md group relative block w-full h-full cursor-pointer">
+                <img src="https://img.kapook.com/u/natthida/travel/travel4414_5.jpg" alt="Phang Nga" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-6">
+                    <h3 class="text-2xl font-serif font-bold text-white mb-1" data-i18n="provPhangNga">พังงา</h3>
+                    <p class="text-white/80 text-sm font-medium" data-i18n="provPhangNgaSub">อ่าวพังงา ภูเขาหินปูน และจุดดำน้ำระดับโลก</p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-16 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="bg-white text-gray-900 p-1.5 rounded-full">
+                        <i data-lucide="compass" class="h-6 w-6"></i>
+                    </div>
+                    <span class="font-serif font-bold text-2xl tracking-tight">
+                        South<span class="text-blue-400">Vibes</span>
+                    </span>
+                </div>
+                <p class="text-gray-400 text-sm max-w-sm" data-i18n="footerDesc">
+                    เพื่อนร่วมทางที่ดีที่สุดของคุณในการสำรวจสถานที่ลับ ชายหาดที่บริสุทธิ์ และวัฒนธรรมที่มีชีวิตชีวาของภาคใต้
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-wider text-sm mb-4" data-i18n="explore">สำรวจ</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="Destinations.html" class="hover:text-white transition-colors" data-i18n="fDest">จุดหมายปลายทาง</a></li>
+                    <li><a href="Atcs.html" class="hover:text-white transition-colors" data-i18n="fGuides">คู่มือท่องเที่ยว</a></li>
+                    <li><a href="Community.html" class="hover:text-white transition-colors" data-i18n="fForum">เว็บบอร์ดชุมชน</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-wider text-sm mb-4" data-i18n="about">เกี่ยวกับเรา</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="#" class="hover:text-white transition-colors" data-i18n="ourStory">เรื่องราวของเรา</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors" data-i18n="contact">ติดต่อเรา</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors" data-i18n="terms">ข้อตกลงและเงื่อนไข</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <div id="history-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-5xl max-h-[90vh] flex flex-col md:flex-row relative animate-[scale_0.3s_ease-in-out] overflow-hidden">
+            
+            <button onclick="closeHistoryModal()" class="absolute top-4 right-4 bg-white/80 md:bg-gray-100 p-2 rounded-full text-gray-600 hover:text-red-500 hover:bg-gray-200 transition-colors z-20 shadow-sm backdrop-blur">
+                <i data-lucide="x" class="h-5 w-5"></i>
+            </button>
+
+            <div class="w-full md:w-5/12 h-64 md:h-auto relative shrink-0 order-1">
+                <img id="history-modal-image" src="" alt="Province Image" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 md:from-transparent to-transparent"></div>
+            </div>
+
+            <div class="w-full md:w-7/12 p-6 md:p-10 flex flex-col order-2 overflow-y-auto custom-scrollbar">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-full uppercase tracking-wider" data-i18n="historyModalTag">ประวัติสถานที่</span>
+                </div>
+                
+                <h3 class="text-3xl font-serif font-bold text-gray-900 mb-6" id="history-modal-title">
+                    ชื่อจังหวัด
+                </h3>
+                
+                <div class="space-y-5 text-gray-700 leading-relaxed mb-8 flex-grow">
+                    <div>
+                        <h4 class="font-bold text-gray-900 text-lg mb-2 flex items-center gap-2" data-i18n="provHistoryLabel">
+                            <i data-lucide="book" class="h-5 w-5 text-blue-600"></i> ประวัติจังหวัด:
+                        </h4>
+                        <p id="history-modal-prov-content">เนื้อหาประวัติจังหวัด</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                        <h4 class="font-bold text-gray-900 text-md mb-2 flex items-center gap-2" data-i18n="imgHistoryLabel">
+                            <i data-lucide="image" class="h-5 w-5 text-blue-600"></i> เรื่องราวของภาพนี้:
+                        </h4>
+                        <p id="history-modal-img-content" class="text-sm">เนื้อหาประวัติรูปภาพ</p>
+                    </div>
+                </div>
+
+                <div class="mt-auto pt-4 border-t border-gray-100">
+                    <a href="Atcs.html" class="inline-flex justify-center items-center bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition-colors gap-2 w-full sm:w-auto shadow-md">
+                        <span data-i18n="viewMoreBtn">ไปดูบทความเพิ่มเติม</span>
+                        <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 🟢 ข้อมูลประวัติศาสตร์สำหรับ Modal
+        // ==========================================
+        const HISTORY_DATA = {
+            'phuket': {
+                title: { TH: 'ภูเก็ต (Phuket)', EN: 'Phuket' },
+                image: 'https://blog-static.kkday.com/th/blog/wp-content/uploads/P03000014_1-1024x683.jpeg',
+                provHistory: {
+                    TH: 'ภูเก็ตเป็นเกาะที่ใหญ่ที่สุดในประเทศไทย ในอดีตเคยมีชื่อเรียกว่า "จังซีลอน" ซึ่งเป็นเมืองท่าที่สำคัญและมีความรุ่งเรืองอย่างมากในยุคของการทำเหมืองแร่ดีบุก ทำให้มีการหลั่งไหลเข้ามาของชาวจีนฮกเกี้ยนและชาวตะวันตก ส่งผลให้ภูเก็ตมีการผสมผสานทางวัฒนธรรมที่โดดเด่น ทั้งด้านสถาปัตยกรรม อาหาร และประเพณี จนกลายเป็นเสน่ห์ดึงดูดนักท่องเที่ยวทั่วโลกในปัจจุบัน',
+                    EN: 'Phuket is the largest island in Thailand, formerly known as "Junk Ceylon". It was a crucial trading port that prospered immensely during the tin mining boom, attracting Hokkien Chinese and Western merchants. This resulted in a unique cultural blend in architecture, food, and traditions that still charms tourists worldwide today.'
+                },
+                imgHistory: {
+                    TH: 'ภาพย่านเมืองเก่าภูเก็ต (Phuket Old Town) ถนนถลาง ที่เต็มไปด้วยตึกแถวสไตล์ชิโน-โปรตุกีส (Sino-Portuguese) ซึ่งสร้างขึ้นในช่วงยุคเหมืองแร่เฟื่องฟู สะท้อนให้เห็นถึงความมั่งคั่งและการผสมผสานศิลปะสถาปัตยกรรมตะวันตกและตะวันออกเข้าด้วยกันอย่างลงตัว',
+                    EN: 'This image captures Phuket Old Town along Thalang Road, lined with Sino-Portuguese shophouses. Built during the tin mining era, these buildings perfectly reflect the region\'s wealth and the beautiful fusion of Western and Eastern architectural styles.'
+                }
+            },
+            'krabi': {
+                title: { TH: 'กระบี่ (Krabi)', EN: 'Krabi' },
+                image: 'https://img.wongnai.com/p/624x0/2020/08/28/707a10fbdb954dee964989b514009dd2.jpg',
+                provHistory: {
+                    TH: 'กระบี่ เมืองร้อยเกาะที่เต็มไปด้วยภูเขาหินปูน มีประวัติศาสตร์การตั้งถิ่นฐานของผู้คนมาตั้งแต่ยุคก่อนประวัติศาสตร์ โดยมีการค้นพบซากโครงกระดูก ถ้ำ และภาพเขียนสีโบราณที่ถ้ำผีหัวโต นอกจากนี้กระบี่ยังเป็นศูนย์กลางการค้าทางทะเลในอดีตที่เชื่อมโยงอารยธรรมต่างๆ เข้าด้วยกัน',
+                    EN: 'Krabi, the city of a hundred islands and limestone karsts, has a history of human settlement dating back to prehistoric times, evidenced by skeletal remains and ancient cave paintings at Tham Phi Hua To. Historically, it was also a maritime trading hub connecting various civilizations.'
+                },
+                imgHistory: {
+                    TH: 'ภาพทะเลแหวก (Separated Sea) หนึ่งใน Unseen Thailand ซึ่งเป็นปรากฏการณ์ธรรมชาติเมื่อน้ำลด จะปรากฏสันทรายขาวสะอาดเชื่อมต่อเกาะ 3 เกาะเข้าด้วยกัน ได้แก่ เกาะทับ เกาะหม้อ และเกาะไก่ เป็นความมหัศจรรย์ของธรรมชาติที่สวยงาม',
+                    EN: 'The image shows the "Separated Sea" (Thale Waek), an Unseen Thailand natural phenomenon. At low tide, a pristine white sandbar emerges, connecting three islands: Koh Tub, Koh Mor, and Koh Kai, showcasing the breathtaking wonders of nature.'
+                }
+            },
+            'surat': {
+                title: { TH: 'สุราษฎร์ธานี (Surat Thani)', EN: 'Surat Thani' },
+                image: 'https://img.kapook.com/u/2020/supattra_wat/surat/s1.jpg',
+                provHistory: {
+                    TH: 'สุราษฎร์ธานี มีความหมายว่า "เมืองแห่งคนดี" ซึ่งพระบาทสมเด็จพระมงกุฎเกล้าเจ้าอยู่หัว (รัชกาลที่ 6) ได้พระราชทานนามให้ ในอดีตเคยเป็นศูนย์กลางของอาณาจักรศรีวิชัยที่เจริญรุ่งเรือง ปัจจุบันเป็นจังหวัดที่มีพื้นที่ใหญ่ที่สุดในภาคใต้และเป็นที่ตั้งของเกาะระดับโลกอย่าง เกาะสมุย และเกาะพะงัน',
+                    EN: 'Surat Thani translates to "City of Good People", a name bestowed by King Vajiravudh (Rama VI). Historically, it was the center of the prosperous Srivijaya Empire. Today, it is the largest province in Southern Thailand and home to world-renowned islands like Koh Samui and Koh Phangan.'
+                },
+                imgHistory: {
+                    TH: 'ภาพเขื่อนรัชชประภา (เขื่อนเชี่ยวหลาน) ภายในอุทยานแห่งชาติเขาสก พื้นที่แห่งนี้เคยเป็นภูเขาหินปูนและป่าดงดิบ ก่อนจะถูกสร้างเป็นเขื่อนอเนกประสงค์ ปัจจุบันได้รับฉายาว่า "กุ้ยหลินเมืองไทย" จากความงามของยอดเขาหินปูนที่โผล่พ้นผิวน้ำ',
+                    EN: 'This is Ratchaprapha Dam (Cheow Lan Lake) in Khao Sok National Park. The area was once dense rainforest and limestone mountains before the dam was built. It is now dubbed the "Guilin of Thailand" due to its stunning limestone peaks emerging from the emerald water.'
+                }
+            },
+            'songkhla': {
+                title: { TH: 'สงขลา (Songkhla)', EN: 'Songkhla' },
+                image: 'https://s359.kapook.com/pagebuilder/4e7f48d8-252d-4c5f-a0bb-8e10a9ad48b4.jpg',
+                provHistory: {
+                    TH: 'สงขลา เป็นเมืองท่าค้าขายที่สำคัญมาหลายร้อยปี เคยมีชื่อเรียกว่า "สิงขร" เนื่องจากพ่อค้าชาวอินเดีย เปอร์เซีย และอาหรับมักแวะพักเรือที่นี่ สงขลามีความโดดเด่นด้วยภูมิประเทศ "เมืองสองทะเล" (ทะเลสาบสงขลาและอ่าวไทย) และเป็นศูนย์รวมวัฒนธรรม ไทย จีน และมุสลิม',
+                    EN: 'Songkhla has been a vital trading port for centuries, once known as "Singora" by Indian, Persian, and Arab merchants. It is unique for its "City of Two Seas" geography (Songkhla Lake and the Gulf of Thailand) and serves as a melting pot of Thai, Chinese, and Muslim cultures.'
+                },
+                imgHistory: {
+                    TH: 'ภาพย่านเมืองเก่าสงขลา บริเวณถนนนครนอก นครใน และถนนนางงาม ซึ่งเต็มไปด้วยอาคารสถาปัตยกรรมแบบจีน-คลาสสิก และชิโน-โปรตุกีส สะท้อนให้เห็นถึงร่องรอยความเจริญทางการค้าในอดีต ปัจจุบันเป็นแหล่งรวมสตรีทอาร์ตและร้านอาหารดั้งเดิม',
+                    EN: 'The image depicts Songkhla Old Town along Nakhon Nok, Nakhon Nai, and Nang Ngam roads, lined with Sino-Classic and Sino-Portuguese architecture. It reflects the area\'s past commercial prosperity and is now a hub for street art and traditional local eateries.'
+                }
+            },
+            'phangnga': {
+                title: { TH: 'พังงา (Phang Nga)', EN: 'Phang Nga' },
+                image: 'https://img.kapook.com/u/natthida/travel/travel4414_5.jpg',
+                provHistory: {
+                    TH: 'พังงา เดิมชื่อ "เมืองภูงา" เป็นเมืองที่ตั้งอยู่ท่ามกลางหุบเขาและทะเล มีประวัติศาสตร์ผูกพันกับยุคเหมืองแร่เช่นเดียวกับภูเก็ต พังงามีชื่อเสียงโด่งดังไปทั่วโลกจากความงดงามของอ่าวพังงา และหมู่เกาะสิมิลัน ซึ่งเป็นแหล่งดำน้ำระดับโลก',
+                    EN: 'Phang Nga, originally called "Phu Nga", is nestled between mountains and the sea. It shares a rich tin-mining history with neighboring Phuket. Phang Nga is globally renowned for the spectacular Phang Nga Bay and the Similan Islands, a world-class diving destination.'
+                },
+                imgHistory: {
+                    TH: 'ภาพเกาะเจมส์บอนด์ (James Bond Island) หรือ เขาตาปู ซึ่งมีลักษณะเป็นแท่งหินปูนโดดเดี่ยวตั้งตระหง่านอยู่ในอ่าวพังงา สถานที่นี้โด่งดังไปทั่วโลกหลังจากถูกใช้เป็นสถานที่ถ่ายทำภาพยนตร์เรื่องเจมส์ บอนด์ ตอน "The Man with the Golden Gun" ในปี พ.ศ. 2517',
+                    EN: 'This is James Bond Island (Khao Ta Pu), a striking solitary limestone needle standing in Phang Nga Bay. The location gained international fame after being featured in the 1974 James Bond film, "The Man with the Golden Gun".'
+                }
+            }
+        };
+
+        let currentHistoryId = null;
+
+        // 🟢 ฟังก์ชันเปิด Modal ประวัติ (เพิ่มการเช็กสิทธิ์เข้าสู่ระบบ)
+        function openHistoryModal(provId) {
+            // เช็กสถานะล็อกอินก่อนเปิด Modal
+            if (!localStorage.getItem("loggedInUser") && !localStorage.getItem("southvibes_profile")) {
+                alert(currentLang === 'TH' ? "กรุณาเข้าสู่ระบบก่อนอ่านประวัติสถานที่ครับ" : "Please sign in to read the location history.");
+                window.location.href = "Login.html"; // พาไปหน้า Login
+                return;
+            }
+
+            currentHistoryId = provId;
+            updateHistoryModalContent();
+            document.getElementById('history-modal').classList.remove('hidden');
+        }
+
+        function closeHistoryModal() {
+            document.getElementById('history-modal').classList.add('hidden');
+            currentHistoryId = null;
+        }
+
+        function updateHistoryModalContent() {
+            if (!currentHistoryId) return;
+            const data = HISTORY_DATA[currentHistoryId];
+            
+            document.getElementById('history-modal-title').innerHTML = data.title[currentLang];
+            document.getElementById('history-modal-prov-content').innerHTML = data.provHistory[currentLang];
+            document.getElementById('history-modal-img-content').innerHTML = data.imgHistory[currentLang];
+            document.getElementById('history-modal-image').src = data.image;
+        }
+
+        // ==========================================
+        // 🟢 ระบบจัดการการล็อกอิน
+        // ==========================================
+        function checkLoginStatus() {
+            const savedProfile = localStorage.getItem("southvibes_profile");
+            const savedUser = localStorage.getItem("loggedInUser");
+            
+            if (savedProfile) {
+                const userProfile = JSON.parse(savedProfile);
+                showProfileData(userProfile.name, userProfile.avatar);
+            } 
+            else if (savedUser) {
+                const user = JSON.parse(savedUser);
+                const newProfile = {
+                    name: user.username,
+                    avatar: user.username.charAt(0).toUpperCase(),
+                    dob: '',
+                    bio: ''
+                };
+                localStorage.setItem('southvibes_profile', JSON.stringify(newProfile));
+                showProfileData(newProfile.name, newProfile.avatar);
+            } 
+            else {
+                document.getElementById('nav-btn-login').style.display = 'block';
+                document.getElementById('nav-user-profile').style.display = 'none';
+            }
+        }
+
+        function showProfileData(name, avatar) {
+            document.getElementById('nav-btn-login').style.display = 'none';
+            document.getElementById('nav-user-profile').style.display = 'flex';
+            
+            document.getElementById('user-name-display').innerText = name;
+            
+            const avatarDiv = document.getElementById('user-avatar');
+            if (avatar && avatar.startsWith('http')) {
+                avatarDiv.innerHTML = `<img src="${avatar}" class="w-full h-full object-cover rounded-full">`;
+            } else {
+                avatarDiv.innerHTML = avatar ? avatar.charAt(0).toUpperCase() : 'U';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            localStorage.removeItem("southvibes_profile");
+            window.location.reload(); 
+        }
+
+        // Language Dictionary
+        const TRANSLATIONS = {
+            TH: { 
+                nav1: 'แนะนำสถานที่', nav2: 'จุดหมาย', nav3: 'ชุมชน', nav4: 'บทความ', login: 'เข้าสู่ระบบ',
+                destHeroTitle: 'ออกเดินทางสู่แดนใต้', destHeroSub: 'สัมผัสมนต์เสน่ห์แห่งท้องทะเล วัฒนธรรมที่หลากหลาย และรสชาติอาหารที่คุณจะไม่ลืม',
+                ourStoryLabel: 'เรื่องราวของเรา', purposeTitle: 'ทำไมเราถึงสร้าง SouthVibes?',
+                purposeDesc: 'ภาคใต้ของไทยไม่ได้มีแค่ภาพจำของทะเลที่สวยงามเท่านั้น แต่ยังเต็มไปด้วยเรื่องราว วิถีชีวิต ศิลปวัฒนธรรม และร้านอาหารลับๆ ที่รอให้คุณไปค้นพบ<br><br>เราสร้าง <strong>SouthVibes</strong> ขึ้นมาเพื่อเป็น "พื้นที่ส่วนกลาง" ให้เหล่าผู้รักการเดินทางได้มารวมตัวกัน แบ่งปันแพลนทริป แลกเปลี่ยนประสบการณ์ และสร้างแรงบันดาลใจให้กันและกัน ไม่ว่าคุณจะเป็นสายลุยแบกเป้ สายคาเฟ่ หรือนักดำน้ำ คุณก็คือส่วนหนึ่งของการเดินทางนี้',
+                val1Title: 'สำรวจที่เที่ยวลับ', val1Desc: 'ค้นหาจุดหมายที่อยู่นอกไกด์บุ๊กทั่วไป',
+                val2Title: 'คอมมูนิตี้ที่อบอุ่น', val2Desc: 'พูดคุยและขอคำแนะนำจากคนในพื้นที่',
+                val3Title: 'แบ่งปันเรื่องราว', val3Desc: 'เขียนรีวิวและสร้างแรงบันดาลใจให้ผู้อื่น',
+                val4Title: 'วางแผนง่ายขึ้น', val4Desc: 'เก็บข้อมูลและสร้างทริปในแบบของคุณ',
+                galleryTitle: 'ประวัติสถานที่ต่างๆ', gallerySub: 'คลิกที่รูปภาพเพื่อเจาะลึกเรื่องราวและประวัติศาสตร์ของแต่ละพื้นที่',
+                provPhuket: 'ภูเก็ต', provPhuketSub: 'ไข่มุกอันดามัน เมืองเก่า และสีสันยามค่ำคืน',
+                provKrabi: 'กระบี่', provKrabiSub: 'สวรรค์ของนักปีนผาและหมู่เกาะ',
+                provSurat: 'สุราษฎร์ธานี', provSuratSub: 'เมืองร้อยเกาะ ป่าฝนที่สมบูรณ์',
+                provSongkhla: 'สงขลา', provSongkhlaSub: 'มนต์เสน่ห์เมืองสองทะเลและตึกเก่า',
+                provPhangNga: 'พังงา', provPhangNgaSub: 'อ่าวพังงา ภูเขาหินปูน และจุดดำน้ำระดับโลก',
+                footerDesc: 'เพื่อนร่วมทางที่ดีที่สุดของคุณในการสำรวจสถานที่ลับ ชายหาดที่บริสุทธิ์ และวัฒนธรรมที่มีชีวิตชีวาของภาคใต้', explore: 'สำรวจ', fDest: 'จุดหมายปลายทาง', fGuides: 'คู่มือท่องเที่ยว', fForum: 'เว็บบอร์ดชุมชน', about: 'เกี่ยวกับเรา', ourStory: 'เรื่องราวของเรา', contact: 'ติดต่อเรา', terms: 'ข้อตกลงและเงื่อนไข',
+                // คำแปล Modal ประวัติ
+                historyModalTag: 'ประวัติสถานที่', provHistoryLabel: 'ประวัติจังหวัด:', imgHistoryLabel: 'เรื่องราวของภาพนี้:', viewMoreBtn: 'ไปดูบทความเพิ่มเติม'
+            },
+            EN: { 
+                nav1: 'Must Visit', nav2: 'Destinations', nav3: 'Community', nav4: 'Articles', login: 'Sign In',
+                destHeroTitle: 'Journey to the South', destHeroSub: 'Experience the charm of the sea, diverse culture, and unforgettable local flavors.',
+                ourStoryLabel: 'Our Story', purposeTitle: 'Why we built SouthVibes?',
+                purposeDesc: 'Southern Thailand is more than just beautiful beaches. It is filled with stories, vibrant culture, and hidden local eateries waiting to be discovered.<br><br>We created <strong>SouthVibes</strong> to be a central hub for travel lovers to connect, share itineraries, exchange experiences, and inspire one another. Whether you are a backpacker, a cafe hopper, or a scuba diver, you are part of this journey.',
+                val1Title: 'Explore Hidden Gems', val1Desc: 'Find places outside the standard guidebooks.',
+                val2Title: 'Warm Community', val2Desc: 'Chat and get advice from locals.',
+                val3Title: 'Share Stories', val3Desc: 'Write reviews and inspire others.',
+                val4Title: 'Plan Easier', val4Desc: 'Gather info and create your perfect trip.',
+                galleryTitle: 'History of Destinations', gallerySub: 'Click on the images to dive deep into the history of each province.',
+                provPhuket: 'Phuket', provPhuketSub: 'Pearl of the Andaman & vibrant nightlife',
+                provKrabi: 'Krabi', provKrabiSub: 'Paradise for rock climbers and island hoppers',
+                provSurat: 'Surat Thani', provSuratSub: 'City of a hundred islands & rich rainforests',
+                provSongkhla: 'Songkhla', provSongkhlaSub: 'The charm of two seas and heritage old town',
+                provPhangNga: 'Phang Nga', provPhangNgaSub: 'Limestone mountains and world-class diving',
+                footerDesc: 'Your ultimate companion for exploring the hidden gems, pristine beaches, and vibrant culture of Southern Thailand.', explore: 'Explore', fDest: 'Destinations', fGuides: 'Travel Guides', fForum: 'Community Forum', about: 'About', ourStory: 'Our Story', contact: 'Contact Us', terms: 'Terms of Service',
+                // คำแปล Modal ประวัติ
+                historyModalTag: 'Location History', provHistoryLabel: 'Province History:', imgHistoryLabel: 'Story Behind the Image:', viewMoreBtn: 'View More Articles'
+            }
+        };
+
+        let currentLang = 'TH';
+
+        function updateApp() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (TRANSLATIONS[currentLang][key]) {
+                    el.innerHTML = TRANSLATIONS[currentLang][key]; 
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(el => {
+                if (currentLang === 'TH') {
+                    el.classList.remove('text-sm'); el.classList.add('text-base');
+                } else {
+                    el.classList.remove('text-base'); el.classList.add('text-sm');
+                }
+            });
+
+            document.getElementById('btn-th').classList.toggle('text-gray-900', currentLang === 'TH');
+            document.getElementById('btn-en').classList.toggle('text-gray-900', currentLang === 'EN');
+            
+            updateHistoryModalContent(); // อัปเดตภาษาใน Modal ด้วย
+            lucide.createIcons();
+        }
+
+        document.getElementById('btn-th').addEventListener('click', () => { currentLang = 'TH'; updateApp(); });
+        document.getElementById('btn-en').addEventListener('click', () => { currentLang = 'EN'; updateApp(); });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateApp();
+            checkLoginStatus(); 
+        });
+    </script>
+</body>
+</html>

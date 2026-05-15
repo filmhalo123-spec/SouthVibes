@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สถานที่แนะนำ | SouthVibes</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .font-serif { font-family: 'Merriweather', serif; }
+        
+        /* Smooth scrolling and image zoom effects */
+        html { scroll-behavior: smooth; }
+        .clip-path-slant { clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%); }
+    </style>
+</head>
+<body class="min-h-screen text-gray-900 selection:bg-blue-200">
+
+    <nav class="border-b border-gray-200 sticky top-0 bg-white/95 backdrop-blur-sm z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer group">
+                    <div class="bg-blue-600 text-white p-2 rounded-full group-hover:bg-blue-700 transition-colors">
+                        <i data-lucide="compass" class="h-6 w-6"></i>
+                    </div>
+                    <span class="font-serif font-bold text-2xl tracking-tight text-gray-900">
+                        South<span class="text-blue-600">Vibes</span>
+                    </span>
+                </a>
+
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="nav-link text-base font-bold tracking-wide text-blue-600 border-b-2 border-blue-600 pb-1 uppercase" data-i18n="nav1">แนะนำสถานที่</a>
+                    <a href="Destinations.html" class="nav-link text-base font-bold tracking-wide text-gray-900 hover:text-blue-600 transition-colors uppercase" data-i18n="nav2">จุดหมาย</a>
+                    <a href="Community.html" class="nav-link text-base font-bold tracking-wide text-gray-900 hover:text-blue-600 transition-colors uppercase" data-i18n="nav3">ชุมชน</a>
+                    <a href="Atcs.html" class="nav-link text-base font-bold tracking-wide text-gray-900 hover:text-blue-600 transition-colors uppercase" data-i18n="nav4">บทความ</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div class="hidden sm:flex items-center gap-2 text-sm font-bold text-gray-400 mr-2">
+                        <i data-lucide="globe" class="h-4 w-4 text-gray-900"></i>
+                        <button id="btn-th" class="hover:text-blue-600 transition-colors text-gray-900">TH</button>
+                        <span>/</span>
+                        <button id="btn-en" class="hover:text-blue-600 transition-colors">EN</button>
+                    </div>
+                    
+                    <a id="nav-btn-login" href="Login.html" class="bg-blue-600 text-white px-5 py-2.5 rounded-full text-sm font-bold tracking-wide hover:bg-blue-700 transition-colors" data-i18n="login">
+                        เข้าสู่ระบบ
+                    </a>
+
+                     <div id="nav-user-profile" class="hidden items-center gap-3">
+                        <a href="profile.html" class="flex items-center gap-2 bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200 cursor-pointer hover:bg-gray-200 transition-colors" title="แก้ไขโปรไฟล์">
+                            <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex justify-center items-center font-bold text-sm overflow-hidden" id="user-avatar">S</div>
+                            <span class="font-bold text-sm text-gray-800 hidden md:block mr-2" id="user-name-display"></span>
+                        </a>
+                        <button onclick="logout()" class="text-sm font-bold text-red-500 hover:text-red-700 transition-colors bg-red-50 px-3 py-2 rounded-full hover:bg-red-100">
+                            ออกจากระบบ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center clip-path-slant overflow-hidden">
+        <div class="absolute inset-0 w-full h-full">
+            <img src="https://images.unsplash.com/photo-1528150177508-7cc0c36cda5c?q=80&w=2000&auto=format&fit=crop" 
+                 alt="Samet Nangshe Viewpoint" class="w-full h-full object-cover animate-[scale_20s_ease-in-out_infinite_alternate]" style="transform: scale(1.05);"/>
+            <div class="absolute inset-0 bg-gradient-to-b from-gray-900/60 via-gray-900/40 to-gray-900/80"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-12">
+            <span class="block text-blue-400 font-bold tracking-[0.2em] uppercase mb-4 text-sm md:text-base drop-shadow-md" data-i18n="heroPreTitle">
+                คัดสรรมาเพื่อคุณ
+            </span>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-black text-white mb-6 drop-shadow-2xl leading-tight" data-i18n="heroTitle">
+                5 สถานที่<br>ต้องห้ามพลาด
+            </h1>
+            <p class="text-lg md:text-2xl text-gray-200 font-light max-w-2xl mx-auto drop-shadow-md" data-i18n="heroSub">
+                ที่สุดแห่งความงดงามของแดนใต้ ที่คุณต้องไปสัมผัสด้วยตาตัวเองสักครั้งในชีวิต
+            </p>
+        </div>
+        
+        <div class="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce text-white/70">
+            <span class="text-xs font-bold tracking-widest uppercase mb-2" data-i18n="scrollDown">เลื่อนลง</span>
+            <i data-lucide="arrow-down" class="h-6 w-6"></i>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 space-y-32">
+
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 group">
+            <div class="w-full lg:w-7/12 relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+                <img src="https://travel.mthai.com/app/uploads/2019/03/50011255_1969741456455844_1652341246678532096_n.jpg" alt="Khao Sok" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                <div class="absolute top-6 left-6 bg-white/90 backdrop-blur text-gray-900 text-xs font-bold px-4 py-2 rounded-full shadow-lg uppercase tracking-wider">
+                    สุราษฎร์ธานี
+                </div>
+            </div>
+            <div class="w-full lg:w-5/12">
+                <div class="flex items-center gap-3 mb-4 text-blue-600 font-bold">
+                    <span class="text-3xl font-serif text-gray-300">01</span>
+                    <hr class="w-12 border-blue-600 border-t-2">
+                </div>
+                <h2 class="text-4xl font-serif font-bold text-gray-900 mb-6 leading-tight" data-i18n="place1Title">เขื่อนเชี่ยวหลาน (เขาสก)</h2>
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed" data-i18n="place1Desc">
+                    ฉายา <strong>"กุ้ยหลินเมืองไทย"</strong> ไม่ได้มาเพราะโชคช่วย สัมผัสความเงียบสงบของผืนน้ำสีเขียวมรกตที่ถูกล้อมรอบด้วยภูเขาหินปูนสูงตระหง่าน นอนแพริมน้ำ ตื่นเช้ามาดูหมอกลอยเหนือน้ำ และสูดอากาศบริสุทธิ์ให้เต็มปอด
+                </p>
+                <a href="#" onclick="openReviewModal(1); return false;" class="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-800 transition-colors group/link">
+                    <span data-i18n="readMore">อ่านรีวิวเพิ่มเติม</span>
+                    <i data-lucide="arrow-right" class="h-4 w-4 group-hover/link:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20 group">
+            <div class="w-full lg:w-7/12 relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+                <img src="https://images.unsplash.com/photo-1537956965359-7573183d1f57?q=80&w=1200&auto=format&fit=crop" alt="Koh Lipe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                <div class="absolute top-6 right-6 bg-white/90 backdrop-blur text-gray-900 text-xs font-bold px-4 py-2 rounded-full shadow-lg uppercase tracking-wider">
+                    สตูล
+                </div>
+            </div>
+            <div class="w-full lg:w-5/12 lg:text-right">
+                <div class="flex items-center lg:justify-end gap-3 mb-4 text-blue-600 font-bold">
+                    <hr class="w-12 border-blue-600 border-t-2 hidden lg:block">
+                    <span class="text-3xl font-serif text-gray-300">02</span>
+                    <hr class="w-12 border-blue-600 border-t-2 lg:hidden">
+                </div>
+                <h2 class="text-4xl font-serif font-bold text-gray-900 mb-6 leading-tight" data-i18n="place2Title">เกาะหลีเป๊ะ</h2>
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed" data-i18n="place2Desc">
+                    สวรรค์ของคนรักทะเลที่ได้รับการขนานนามว่า <strong>"มัลดีฟส์เมืองไทย"</strong> โดดเด่นด้วยหาดทรายขาวละเอียดราวกับแป้ง น้ำทะเลใสจนเห็นตัวปลา และโลกใต้น้ำที่สมบูรณ์แบบที่สุดแห่งหนึ่งในทะเลอันดามันใต้
+                </p>
+                <a href="#" onclick="openReviewModal(2); return false;" class="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-800 transition-colors group/link">
+                    <span data-i18n="readMore">อ่านรีวิวเพิ่มเติม</span>
+                    <i data-lucide="arrow-right" class="h-4 w-4 group-hover/link:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 group">
+            <div class="w-full lg:w-7/12 relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+                <img src="https://wikicommunity.sac.or.th/files/community/1096/attach/large-64fb3e07858b9.jpg" alt="Phuket Old Town" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                <div class="absolute top-6 left-6 bg-white/90 backdrop-blur text-gray-900 text-xs font-bold px-4 py-2 rounded-full shadow-lg uppercase tracking-wider">
+                    ภูเก็ต
+                </div>
+            </div>
+            <div class="w-full lg:w-5/12">
+                <div class="flex items-center gap-3 mb-4 text-blue-600 font-bold">
+                    <span class="text-3xl font-serif text-gray-300">03</span>
+                    <hr class="w-12 border-blue-600 border-t-2">
+                </div>
+                <h2 class="text-4xl font-serif font-bold text-gray-900 mb-6 leading-tight" data-i18n="place3Title">ย่านเมืองเก่าภูเก็ต</h2>
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed" data-i18n="place3Desc">
+                    มนต์เสน่ห์แห่งสถาปัตยกรรม <strong>ชิโน-โปรตุกีส</strong> เดินทอดน่องชมตึกเก่าสีพาสเทล แวะชิมสตรีทฟู้ดระดับมิชลินไกด์ และคาเฟ่สุดชิคที่ซ่อนตัวอยู่ตามซอกซอย เป็นสถานที่ที่ถ่ายรูปมุมไหนก็สวยไปหมด
+                </p>
+                <a href="#" onclick="openReviewModal(3); return false;" class="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-800 transition-colors group/link">
+                    <span data-i18n="readMore">อ่านรีวิวเพิ่มเติม</span>
+                    <i data-lucide="arrow-right" class="h-4 w-4 group-hover/link:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20 group">
+            <div class="w-full lg:w-7/12 relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+                <img src="https://www.khaosod.co.th/wpapp/uploads/2024/08/image1-211.jpg" alt="Samet Nangshe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                <div class="absolute top-6 right-6 bg-white/90 backdrop-blur text-gray-900 text-xs font-bold px-4 py-2 rounded-full shadow-lg uppercase tracking-wider">
+                    พังงา
+                </div>
+            </div>
+            <div class="w-full lg:w-5/12 lg:text-right">
+                <div class="flex items-center lg:justify-end gap-3 mb-4 text-blue-600 font-bold">
+                    <hr class="w-12 border-blue-600 border-t-2 hidden lg:block">
+                    <span class="text-3xl font-serif text-gray-300">04</span>
+                    <hr class="w-12 border-blue-600 border-t-2 lg:hidden">
+                </div>
+                <h2 class="text-4xl font-serif font-bold text-gray-900 mb-6 leading-tight" data-i18n="place4Title">จุดชมวิวเสม็ดนางชี</h2>
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed" data-i18n="place4Desc">
+                    ตื่นแต่เช้ามืดเพื่อมารอชม <strong>พระอาทิตย์ขึ้นที่สวยที่สุด</strong> ภาพภูเขาหินปูนน้อยใหญ่ที่โผล่พ้นน้ำในอ่าวพังงา กระทบกับแสงแรกของวัน เป็นวิวอลังการระดับโลกที่คุ้มค่ากับการเดินทางมาเยือน
+                </p>
+                <a href="#" onclick="openReviewModal(4); return false;" class="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-800 transition-colors group/link">
+                    <span data-i18n="readMore">อ่านรีวิวเพิ่มเติม</span>
+                    <i data-lucide="arrow-right" class="h-4 w-4 group-hover/link:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 group">
+            <div class="w-full lg:w-7/12 relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+                <img src="https://img.kapook.com/u/2016/panadda/travel09/similan1.jpg" alt="Similan Islands" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                <div class="absolute top-6 left-6 bg-white/90 backdrop-blur text-gray-900 text-xs font-bold px-4 py-2 rounded-full shadow-lg uppercase tracking-wider">
+                    พังงา
+                </div>
+            </div>
+            <div class="w-full lg:w-5/12">
+                <div class="flex items-center gap-3 mb-4 text-blue-600 font-bold">
+                    <span class="text-3xl font-serif text-gray-300">05</span>
+                    <hr class="w-12 border-blue-600 border-t-2">
+                </div>
+                <h2 class="text-4xl font-serif font-bold text-gray-900 mb-6 leading-tight" data-i18n="place5Title">หมู่เกาะสิมิลัน</h2>
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed" data-i18n="place5Desc">
+                    <strong>ราชินีแห่งอันดามัน</strong> ที่เปิดให้เที่ยวแค่ช่วงครึ่งปีเท่านั้น! โดดเด่นด้วยหินเรือใบสัญลักษณ์ของเกาะ น้ำทะเลสีฟ้าใสแจ๋วระดับ 4K และเป็นจุดดำน้ำตื้นและน้ำลึกที่พบเต่าทะเลได้บ่อยที่สุด
+                </p>
+                <a href="#" onclick="openReviewModal(5); return false;" class="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-800 transition-colors group/link">
+                    <span data-i18n="readMore">อ่านรีวิวเพิ่มเติม</span>
+                    <i data-lucide="arrow-right" class="h-4 w-4 group-hover/link:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-blue-600 py-20 mt-12 text-center px-4">
+        <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6" data-i18n="ctaTitle">พร้อมที่จะออกเดินทางหรือยัง?</h2>
+        <p class="text-blue-100 text-lg mb-8 max-w-2xl mx-auto" data-i18n="ctaSub">เข้าร่วมชุมชน SouthVibes เพื่อพูดคุย ขอคำแนะนำ และวางแผนการเดินทางไปกับนักเดินทางคนอื่นๆ</p>
+        <button onclick="checkAndGoCommunity()" class="inline-block bg-white text-blue-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-colors shadow-xl" data-i18n="ctaBtn">
+            เข้าสู่เว็บบอร์ดชุมชน
+        </button>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="bg-white text-gray-900 p-1.5 rounded-full">
+                        <i data-lucide="compass" class="h-6 w-6"></i>
+                    </div>
+                    <span class="font-serif font-bold text-2xl tracking-tight">
+                        South<span class="text-blue-400">Vibes</span>
+                    </span>
+                </div>
+                <p class="text-gray-400 text-sm max-w-sm" data-i18n="footerDesc">
+                    เพื่อนร่วมทางที่ดีที่สุดของคุณในการสำรวจสถานที่ลับ ชายหาดที่บริสุทธิ์ และวัฒนธรรมที่มีชีวิตชีวาของภาคใต้
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-wider text-sm mb-4" data-i18n="explore">สำรวจ</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="" class="hover:text-white transition-colors" data-i18n="nav2">จุดหมาย</a></li>
+                    <li><a href="index.html" class="hover:text-white transition-colors" data-i18n="nav1">แนะนำสถานที่</a></li>
+                    <li><a href="Communitycopy.html" class="hover:text-white transition-colors" data-i18n="nav3">ชุมชน</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-wider text-sm mb-4" data-i18n="about">เกี่ยวกับเรา</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="#" class="hover:text-white transition-colors" data-i18n="ourStory">เรื่องราวของเรา</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors" data-i18n="contact">ติดต่อเรา</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <div id="review-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto md:overflow-hidden flex flex-col md:flex-row relative animate-[scale_0.3s_ease-in-out]">
+            
+            <button onclick="closeReviewModal()" class="absolute top-4 right-4 bg-white md:bg-gray-100 p-2 rounded-full text-gray-600 hover:text-red-500 hover:bg-gray-200 transition-colors z-20 shadow-sm">
+                <i data-lucide="x" class="h-5 w-5"></i>
+            </button>
+
+            <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center order-2 md:order-1 overflow-y-auto max-h-[90vh]">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider" data-i18n="modalReviewTag">รีวิวเจาะลึก</span>
+                </div>
+                <h3 class="text-3xl font-serif font-bold text-gray-900 mb-6 leading-tight" id="review-modal-title">
+                    หัวข้อ
+                </h3>
+                <div class="text-gray-600 leading-relaxed space-y-4" id="review-modal-content">
+                    เนื้อหา
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 h-64 md:h-auto relative order-1 md:order-2 shrink-0">
+                <img id="review-modal-image" src="" alt="Review Image" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 md:from-transparent to-transparent"></div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 🟢 ข้อมูลรีวิวสำหรับ Modal
+        // ==========================================
+        const REVIEWS_DATA = {
+            1: {
+                title: { TH: 'เขื่อนเชี่ยวหลาน (เขาสก)', EN: 'Cheow Lan Lake (Khao Sok)' },
+                image: 'https://travel.mthai.com/app/uploads/2019/03/50011255_1969741456455844_1652341246678532096_n.jpg',
+                content: {
+                    TH: 'การเดินทางมาที่เขื่อนเชี่ยวหลานเหมือนได้หลุดมาอีกโลกหนึ่ง... <br><br>แนะนำให้จองแพพักล่วงหน้า กิจกรรมเด่นๆ คือการนั่งเรือหางยาวชม <strong>"เขาสามเกลอ"</strong> และพายเรือคายัคหน้าแพพักในตอนเช้าตรู่ สัญญาณโทรศัพท์อาจจะไม่มีในบางจุด ซึ่งถือเป็นข้อดีให้คุณได้พักผ่อนอย่างเต็มที่',
+                    EN: 'Traveling to Cheow Lan Lake feels like entering another world... <br><br>Highly recommend booking a raft house in advance. Highlights include taking a longtail boat to see the <strong>Three Friends</strong> limestone karst and kayaking at dawn. Minimal cell signal makes it a perfect digital detox.'
+                }
+            },
+            2: {
+                title: { TH: 'เกาะหลีเป๊ะ', EN: 'Koh Lipe' },
+                image: 'https://images.unsplash.com/photo-1537956965359-7573183d1f57?q=80&w=1200&auto=format&fit=crop',
+                content: {
+                    TH: 'เกาะหลีเป๊ะเป็นสวรรค์ของนักดำน้ำอย่างแท้จริง น้ำใสมากจนเห็นปะการังตั้งแต่หน้าหาด... <br><br>ช่วงกลางวันแนะนำให้เหมาเรือหางยาวไปดำน้ำตามเกาะรอบนอก ส่วนช่วงค่ำ <strong>ถนนคนเดิน (Walking Street)</strong> มีอาหารทะเลสดๆ และโรตีชาชักที่ห้ามพลาด!',
+                    EN: 'Koh Lipe is a true diver\'s paradise. The water is so clear you can see corals right from the beach... <br><br>During the day, charter a longtail boat for island-hopping. At night, the <strong>Walking Street</strong> offers fresh seafood and the absolute must-try Roti with Thai tea!'
+                }
+            },
+            3: {
+                title: { TH: 'ย่านเมืองเก่าภูเก็ต', EN: 'Phuket Old Town' },
+                image: 'https://wikicommunity.sac.or.th/files/community/1096/attach/large-64fb3e07858b9.jpg',
+                content: {
+                    TH: 'เดินเล่นในย่านเมืองเก่าภูเก็ต คุณจะได้พบกับตึกชิโน-โปรตุกีสที่ถูกอนุรักษ์ไว้อย่างดี... <br><br>ตึกสีพาสเทลตามถนนถลาง ถนนพังงา และถนนดีบุก เป็นมุมถ่ายรูปที่สวยมาก อย่าลืมแวะชิมอาหารพื้นเมืองอย่าง <strong>หมูฮ้อง</strong> และขนมหวาน <strong>โอเอ๋ว</strong> คาเฟ่ชิคๆ ก็มีให้เลือกนั่งพักเหนื่อยเต็มไปหมด',
+                    EN: 'Strolling through Phuket Old Town, you will find beautifully preserved Sino-Portuguese buildings... <br><br>The pastel buildings along Thalang, Phang Nga, and Dibuk roads are highly photogenic. Don\'t forget to try local dishes like <strong>Moo Hong</strong> and the refreshing dessert <strong>O-Aew</strong>. There are plenty of chic cafes to relax in too.'
+                }
+            },
+            4: {
+                title: { TH: 'จุดชมวิวเสม็ดนางชี', EN: 'Samet Nangshe Viewpoint' },
+                image: 'https://www.khaosod.co.th/wpapp/uploads/2024/08/image1-211.jpg',
+                content: {
+                    TH: 'จุดชมวิวที่ต้องมาให้ได้สักครั้งในชีวิต! แนะนำให้เดินทางมาถึงช่วงก่อนพระอาทิตย์ขึ้น (ประมาณตี 5 ครึ่ง)... <br><br>ทางขึ้นค่อนข้างชันแต่มีรถกระบะของชาวบ้านคอยให้บริการตลอด วิวอ่าวพังงาจากมุมสูงที่เต็มไปด้วยภูเขาหินปูน พร้อมแสงสีทองในยามเช้า คือที่สุดของความประทับใจ',
+                    EN: 'A viewpoint you absolutely must visit! Highly recommend arriving before sunrise (around 5:30 AM)... <br><br>The road up is quite steep, but local pickup trucks are available to transport visitors. The panoramic view of Phang Nga Bay\'s limestone karsts bathed in golden morning light is truly unforgettable.'
+                }
+            },
+            5: {
+                title: { TH: 'หมู่เกาะสิมิลัน', EN: 'Similan Islands' },
+                image: 'https://img.kapook.com/u/2016/panadda/travel09/similan1.jpg',
+                content: {
+                    TH: 'เปิดให้เข้าชมเพียงช่วง <strong>กลางเดือนตุลาคมถึงกลางเดือนพฤษภาคม</strong> ของทุกปีเท่านั้น... <br><br>สิมิลันขึ้นชื่อเรื่องน้ำทะเลสีฟ้าใสจนเห็นผืนทรายด้านล่าง จุดเด่นคือ "หินเรือใบ" ที่เกาะ 8 ที่ต้องปีนขึ้นไปถ่ายรูป และจุดดำน้ำที่เกาะ 9 ที่มีโอกาสเจอเต่าทะเลน่ารักๆ สูงมาก',
+                    EN: 'Open to visitors only from <strong>mid-October to mid-May</strong> each year to protect the environment... <br><br>Similan is famous for its crystal clear blue water. Highlights include the "Sailboat Rock" viewpoint on Island 8 and snorkeling at Island 9, where you have a very high chance of swimming with sea turtles.'
+                }
+            }
+        };
+
+        let currentReviewId = null;
+
+        function openReviewModal(placeId) {
+            // 🟢 เช็กสถานะล็อกอินก่อนเปิด Modal หากยังไม่ได้ล็อกอิน ให้เด้งเตือนและไม่เปิดป๊อปอัป
+            if (!localStorage.getItem("loggedInUser") && !localStorage.getItem("southvibes_profile")) {
+                alert(currentLang === 'TH' ? "กรุณาเข้าสู่ระบบก่อนอ่านรีวิวเพิ่มเติมครับ" : "Please sign in to read full reviews.");
+                window.location.href = "Login.html"; // พาไปหน้า Login
+                return;
+            }
+
+            currentReviewId = placeId;
+            updateModalContent();
+            document.getElementById('review-modal').classList.remove('hidden');
+        }
+
+        function closeReviewModal() {
+            document.getElementById('review-modal').classList.add('hidden');
+            currentReviewId = null;
+        }
+
+        function updateModalContent() {
+            if (!currentReviewId) return;
+            const data = REVIEWS_DATA[currentReviewId];
+            document.getElementById('review-modal-title').innerHTML = data.title[currentLang];
+            document.getElementById('review-modal-content').innerHTML = data.content[currentLang];
+            document.getElementById('review-modal-image').src = data.image;
+        }
+
+        // ==========================================
+        // 🟢 ระบบจัดการการล็อกอิน
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            updateApp(); 
+            checkLoginStatus(); 
+        });
+
+        function checkLoginStatus() {
+            const savedProfile = localStorage.getItem("southvibes_profile");
+            const savedUser = localStorage.getItem("loggedInUser");
+            
+            if (savedProfile) {
+                const userProfile = JSON.parse(savedProfile);
+                showProfileData(userProfile.name, userProfile.avatar);
+            } 
+            else if (savedUser) {
+                const user = JSON.parse(savedUser);
+                const newProfile = {
+                    name: user.username,
+                    avatar: user.username.charAt(0).toUpperCase(),
+                    dob: '',
+                    bio: ''
+                };
+                localStorage.setItem('southvibes_profile', JSON.stringify(newProfile));
+                showProfileData(newProfile.name, newProfile.avatar);
+            } 
+            else {
+                document.getElementById('nav-btn-login').style.display = 'block';
+                document.getElementById('nav-user-profile').style.display = 'none';
+            }
+        }
+
+        function showProfileData(name, avatar) {
+            document.getElementById('nav-btn-login').style.display = 'none';
+            document.getElementById('nav-user-profile').style.display = 'flex';
+            
+            document.getElementById('user-name-display').innerText = name;
+            
+            const avatarDiv = document.getElementById('user-avatar');
+            if (avatar && avatar.startsWith('http')) {
+                avatarDiv.innerHTML = `<img src="${avatar}" class="w-full h-full object-cover rounded-full">`;
+            } else {
+                avatarDiv.innerHTML = avatar ? avatar.charAt(0).toUpperCase() : 'U';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            localStorage.removeItem("southvibes_profile");
+            window.location.reload(); 
+        }
+
+        function checkAndGoCommunity() {
+            if(localStorage.getItem("loggedInUser") || localStorage.getItem("southvibes_profile")) {
+                window.location.href = "Community.html"; 
+            } else {
+                alert(currentLang === 'TH' ? "กรุณาเข้าสู่ระบบก่อนเข้าใช้งานเว็บบอร์ดชุมชนครับ" : "Please sign in to access the community board.");
+                window.location.href = "Login.html"; 
+            }
+        }
+
+        // ==========================================
+        // 🟢 ระบบแปลภาษา
+        // ==========================================
+        const TRANSLATIONS = {
+            TH: { 
+                nav1: 'แนะนำสถานที่', nav2: 'จุดหมาย', nav3: 'ชุมชน', nav4: 'บทความ', login: 'เข้าสู่ระบบ',
+                heroPreTitle: 'คัดสรรมาเพื่อคุณ', heroTitle: '5 สถานที่<br>ต้องห้ามพลาด', heroSub: 'ที่สุดแห่งความงดงามของแดนใต้ ที่คุณต้องไปสัมผัสด้วยตาตัวเองสักครั้งในชีวิต', scrollDown: 'เลื่อนลง',
+                place1Title: 'เขื่อนเชี่ยวหลาน (เขาสก)', place1Desc: 'ฉายา <strong>"กุ้ยหลินเมืองไทย"</strong> ไม่ได้มาเพราะโชคช่วย สัมผัสความเงียบสงบของผืนน้ำสีเขียวมรกตที่ถูกล้อมรอบด้วยภูเขาหินปูนสูงตระหง่าน นอนแพริมน้ำ ตื่นเช้ามาดูหมอกลอยเหนือน้ำ และสูดอากาศบริสุทธิ์ให้เต็มปอด',
+                place2Title: 'เกาะหลีเป๊ะ', place2Desc: 'สวรรค์ของคนรักทะเลที่ได้รับการขนานนามว่า <strong>"มัลดีฟส์เมืองไทย"</strong> โดดเด่นด้วยหาดทรายขาวละเอียดราวกับแป้ง น้ำทะเลใสจนเห็นตัวปลา และโลกใต้น้ำที่สมบูรณ์แบบที่สุดแห่งหนึ่งในทะเลอันดามันใต้',
+                place3Title: 'ย่านเมืองเก่าภูเก็ต', place3Desc: 'มนต์เสน่ห์แห่งสถาปัตยกรรม <strong>ชิโน-โปรตุกีส</strong> เดินทอดน่องชมตึกเก่าสีพาสเทล แวะชิมสตรีทฟู้ดระดับมิชลินไกด์ และคาเฟ่สุดชิคที่ซ่อนตัวอยู่ตามซอกซอย เป็นสถานที่ที่ถ่ายรูปมุมไหนก็สวยไปหมด',
+                place4Title: 'จุดชมวิวเสม็ดนางชี', place4Desc: 'ตื่นแต่เช้ามืดเพื่อมารอชม <strong>พระอาทิตย์ขึ้นที่สวยที่สุด</strong> ภาพภูเขาหินปูนน้อยใหญ่ที่โผล่พ้นน้ำในอ่าวพังงา กระทบกับแสงแรกของวัน เป็นวิวอลังการระดับโลกที่คุ้มค่ากับการเดินทางมาเยือน',
+                place5Title: 'หมู่เกาะสิมิลัน', place5Desc: '<strong>ราชินีแห่งอันดามัน</strong> ที่เปิดให้เที่ยวแค่ช่วงครึ่งปีเท่านั้น! โดดเด่นด้วยหินเรือใบสัญลักษณ์ของเกาะ น้ำทะเลสีฟ้าใสแจ๋วระดับ 4K และเป็นจุดดำน้ำตื้นและน้ำลึกที่พบเต่าทะเลได้บ่อยที่สุด',
+                readMore: 'อ่านรีวิวเพิ่มเติม', ctaTitle: 'พร้อมที่จะออกเดินทางหรือยัง?', ctaSub: 'เข้าร่วมชุมชน SouthVibes เพื่อพูดคุย ขอคำแนะนำ และวางแผนการเดินทางไปกับนักเดินทางคนอื่นๆ', ctaBtn: 'เข้าสู่เว็บบอร์ดชุมชน',
+                footerDesc: 'เพื่อนร่วมทางที่ดีที่สุดของคุณในการสำรวจสถานที่ลับ ชายหาดที่บริสุทธิ์ และวัฒนธรรมที่มีชีวิตชีวาของภาคใต้', explore: 'สำรวจ', about: 'เกี่ยวกับเรา', ourStory: 'เรื่องราวของเรา', contact: 'ติดต่อเรา',
+                modalReviewTag: 'รีวิวเจาะลึก'
+            },
+            EN: { 
+                nav1: 'Must Visit', nav2: 'Destinations', nav3: 'Community', nav4: 'Articles', login: 'Sign In',
+                heroPreTitle: 'Curated For You', heroTitle: 'Top 5 Places<br>You Must Visit', heroSub: 'The absolute best of Southern Thailand. Experience these breathtaking locations at least once in your lifetime.', scrollDown: 'Scroll Down',
+                place1Title: 'Cheow Lan Lake (Khao Sok)', place1Desc: 'Known as the <strong>"Guilin of Thailand"</strong>. Experience the tranquility of emerald green waters surrounded by towering limestone mountains. Sleep on a floating raft house and wake up to the morning mist.',
+                place2Title: 'Koh Lipe', place2Desc: 'A paradise for beach lovers, often called the <strong>"Maldives of Thailand"</strong>. Famous for its powdery white sand, crystal-clear water, and some of the best snorkeling spots in the South Andaman sea.',
+                place3Title: 'Phuket Old Town', place3Desc: 'Stroll through streets lined with beautifully preserved <strong>Sino-Portuguese</strong> buildings. Enjoy Michelin-guide street food, chic cafes, and countless photo opportunities.',
+                place4Title: 'Samet Nangshe Viewpoint', place4Desc: 'Wake up early to catch the <strong>most stunning sunrise</strong>. The view of limestone karsts dotting Phang Nga Bay under the morning light is truly world-class.',
+                place5Title: 'Similan Islands', place5Desc: 'The <strong>Queen of the Andaman</strong>, open for only half the year! Known for the iconic Sailboat Rock, 4K crystal-clear water, and excellent chances to dive with sea turtles.',
+                readMore: 'Read More Reviews', ctaTitle: 'Ready to start your journey?', ctaSub: 'Join the SouthVibes community to chat, get advice, and plan your trip with fellow travelers.', ctaBtn: 'Enter Community Board',
+                footerDesc: 'Your ultimate companion for exploring the hidden gems, pristine beaches, and vibrant culture of Southern Thailand.', explore: 'Explore', about: 'About', ourStory: 'Our Story', contact: 'Contact Us',
+                modalReviewTag: 'In-Depth Review'
+            }
+        };
+
+        let currentLang = 'TH';
+
+
+        function updateApp() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (TRANSLATIONS[currentLang][key]) {
+                    el.innerHTML = TRANSLATIONS[currentLang][key];
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(el => {
+                if (currentLang === 'TH') {
+                    el.classList.remove('text-sm'); el.classList.add('text-base');
+                } else {
+                    el.classList.remove('text-base'); el.classList.add('text-sm');
+                }
+            });
+
+            document.getElementById('btn-th').classList.toggle('text-gray-900', currentLang === 'TH');
+            document.getElementById('btn-en').classList.toggle('text-gray-900', currentLang === 'EN');
+            
+            // อัปเดตเนื้อหาใน Modal ด้วยถ้าเปิดค้างไว้
+            updateModalContent();
+            
+            lucide.createIcons();
+        }
+
+        document.getElementById('btn-th').addEventListener('click', () => { currentLang = 'TH'; updateApp(); });
+        document.getElementById('btn-en').addEventListener('click', () => { currentLang = 'EN'; updateApp(); });
+    </script>
+</body>
+</html>

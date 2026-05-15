@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บทความท่องเที่ยว | SouthVibes</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Merriweather', serif; }
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
+        /* Custom Scrollbar for Modal */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-900 selection:bg-blue-200">
+
+    <nav class="border-b border-gray-200 sticky top-0 bg-white z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer group">
+                    <div class="bg-blue-600 text-white p-2 rounded-full group-hover:bg-blue-700 transition-colors">
+                        <i data-lucide="compass" class="h-6 w-6"></i>
+                    </div>
+                    <span class="font-serif font-bold text-2xl tracking-tight text-gray-900">
+                        South<span class="text-blue-600">Vibes</span>
+                    </span>
+                </a>
+
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="nav-link text-base font-bold tracking-wide text-gray-900 hover:text-blue-600 transition-colors uppercase" data-i18n="nav1">แนะนำสถานที่</a>
+                    <a href="Destinations.html" class="nav-link text-base font-bold tracking-wide text-gray-900 hover:text-blue-600 transition-colors uppercase" data-i18n="nav2">จุดหมาย</a>
+                    <a href="Community.html" class="nav-link text-base font-bold tracking-wide text-gray-900 hover:text-blue-600 transition-colors uppercase" data-i18n="nav3">ชุมชน</a>
+                    <a href="Atcs.html" class="nav-link text-base font-bold tracking-wide text-blue-600 border-b-2 border-blue-600 pb-1 uppercase" data-i18n="nav4">บทความ</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div class="hidden sm:flex items-center gap-2 text-sm font-bold text-gray-400 mr-2">
+                        <i data-lucide="globe" class="h-4 w-4 text-gray-900"></i>
+                        <button id="btn-th" class="hover:text-blue-600 transition-colors text-gray-900">TH</button>
+                        <span>/</span>
+                        <button id="btn-en" class="hover:text-blue-600 transition-colors">EN</button>
+                    </div>
+                    
+                    <a id="nav-btn-login" href="Login.html" class="bg-blue-600 text-white px-5 py-2.5 rounded-full text-sm font-bold tracking-wide hover:bg-blue-700 transition-colors" data-i18n="login">
+                        เข้าสู่ระบบ
+                    </a>
+
+                    <div id="nav-user-profile" class="hidden items-center gap-3">
+                        <a href="profile.html" class="flex items-center gap-2 bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200 cursor-pointer hover:bg-gray-200 transition-colors" title="แก้ไขโปรไฟล์">
+                            <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex justify-center items-center font-bold text-sm overflow-hidden" id="user-avatar">S</div>
+                            <span class="font-bold text-sm text-gray-800 hidden md:block mr-2" id="user-name-display"></span>
+                        </a>
+                        <button onclick="logout()" class="text-sm font-bold text-red-500 hover:text-red-700 transition-colors bg-red-50 px-3 py-2 rounded-full hover:bg-red-100">
+                            ออกจากระบบ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div onclick="openArticleModal('featured')" class="relative w-full h-[500px] rounded-2xl overflow-hidden group cursor-pointer shadow-xl">
+            <img src="https://www.paradise-kohyao.com/wp-content/uploads/2025/04/13.3-%E0%B8%AB%E0%B8%A1%E0%B8%B9%E0%B9%88%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%B0%E0%B8%AA%E0%B8%B4%E0%B8%A1%E0%B8%B4%E0%B8%A5%E0%B8%B1%E0%B8%99-%E0%B8%9E%E0%B8%B1%E0%B8%87%E0%B8%87%E0%B8%B2-1024x683.webp" 
+                 alt="Similan Islands" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
+            
+            <div class="absolute bottom-0 left-0 p-8 md:p-12 w-full max-w-3xl">
+                <span class="inline-block bg-blue-600 text-white text-xs font-bold tracking-widest uppercase px-3 py-1.5 rounded mb-4" id="featured-tag">
+                    ESSENTIAL GUIDE
+                </span>
+                <h1 class="text-3xl md:text-5xl font-serif font-bold text-white mb-4 leading-tight group-hover:text-blue-300 transition-colors" id="featured-title">
+                    คู่มือเที่ยวสิมิลัน: ราชินีแห่งอันดามัน
+                </h1>
+                <p class="text-white/80 text-lg mb-4 line-clamp-2" id="featured-excerpt">
+                    เจาะลึกทุกข้อมูลที่คุณต้องรู้ก่อนไปสัมผัสหาดทรายขาวละเอียดราวกับแป้ง และจุดดำน้ำตื้นที่สวยที่สุดในประเทศไทย
+                </p>
+                <div class="flex items-center gap-4 text-white/60 text-sm font-medium">
+                    <span id="featured-author">โดย SouthVibes Editors</span>
+                    <span>•</span>
+                    <span id="featured-time">อ่าน 8 นาที</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 border-b border-gray-200">
+        <div class="flex items-center gap-6 overflow-x-auto pb-4 hide-scrollbar">
+            <button onclick="setFilter('all')" id="btn-filter-all" class="filter-btn text-sm font-bold uppercase tracking-wider text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap transition-colors" data-i18n="catAll">ทั้งหมด</button>
+            <button onclick="setFilter('guide')" id="btn-filter-guide" class="filter-btn text-sm font-bold uppercase tracking-wider text-gray-500 hover:text-gray-900 pb-1 whitespace-nowrap transition-colors" data-i18n="catGuide">คู่มือท่องเที่ยว</button>
+            <button onclick="setFilter('food')" id="btn-filter-food" class="filter-btn text-sm font-bold uppercase tracking-wider text-gray-500 hover:text-gray-900 pb-1 whitespace-nowrap transition-colors" data-i18n="catFood">อาหารท้องถิ่น</button>
+            <button onclick="setFilter('hidden')" id="btn-filter-hidden" class="filter-btn text-sm font-bold uppercase tracking-wider text-gray-500 hover:text-gray-900 pb-1 whitespace-nowrap transition-colors" data-i18n="catHidden">สถานที่ลับ</button>
+            <button onclick="setFilter('culture')" id="btn-filter-culture" class="filter-btn text-sm font-bold uppercase tracking-wider text-gray-500 hover:text-gray-900 pb-1 whitespace-nowrap transition-colors" data-i18n="catCulture">ศิลปวัฒนธรรม</button>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-3xl font-serif font-bold text-gray-900 mb-8" data-i18n="latestArticles">บทความล่าสุด</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12" id="articles-container">
+            </div>
+
+        <div class="mt-16 flex justify-center" id="load-more-container">
+            <button class="px-8 py-4 border-2 border-gray-900 text-gray-900 font-bold tracking-wide uppercase text-sm hover:bg-gray-900 hover:text-white transition-colors" data-i18n="loadMore">
+                โหลดบทความเพิ่มเติม
+            </button>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-16 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="bg-white text-gray-900 p-1.5 rounded-full">
+                        <i data-lucide="compass" class="h-6 w-6"></i>
+                    </div>
+                    <span class="font-serif font-bold text-2xl tracking-tight">
+                        South<span class="text-blue-400">Vibes</span>
+                    </span>
+                </div>
+                <p class="text-gray-400 text-sm max-w-sm" data-i18n="footerDesc">
+                    เพื่อนร่วมทางที่ดีที่สุดของคุณในการสำรวจสถานที่ลับ ชายหาดที่บริสุทธิ์ และวัฒนธรรมที่มีชีวิตชีวาของภาคใต้
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-wider text-sm mb-4" data-i18n="explore">สำรวจ</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="index.html" class="hover:text-white transition-colors" data-i18n="fDest">แนะนำสถานที่</a></li>
+                    <li><a href="Destinations.html" class="hover:text-white transition-colors" data-i18n="fGuides">จุดหมายปลายทาง</a></li>
+                    <li><a href="Community.html" class="hover:text-white transition-colors" data-i18n="fForum">เว็บบอร์ดชุมชน</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-wider text-sm mb-4" data-i18n="about">เกี่ยวกับเรา</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="#" class="hover:text-white transition-colors" data-i18n="ourStory">เรื่องราวของเรา</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors" data-i18n="contact">ติดต่อเรา</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors" data-i18n="terms">ข้อตกลงและเงื่อนไข</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <div id="article-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-5xl max-h-[90vh] flex flex-col md:flex-row relative animate-[scale_0.3s_ease-in-out] overflow-hidden">
+            
+            <button onclick="closeArticleModal()" class="absolute top-4 right-4 bg-white/80 md:bg-gray-100 p-2 rounded-full text-gray-600 hover:text-red-500 hover:bg-gray-200 transition-colors z-20 shadow-sm backdrop-blur">
+                <i data-lucide="x" class="h-5 w-5"></i>
+            </button>
+
+            <div class="w-full md:w-5/12 h-64 md:h-auto relative shrink-0 order-1">
+                <img id="modal-img" src="" alt="Article Image" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 md:from-transparent to-transparent"></div>
+            </div>
+
+            <div class="w-full md:w-7/12 p-6 md:p-10 flex flex-col order-2 overflow-y-auto custom-scrollbar">
+                <div class="flex items-center gap-2 mb-4">
+                    <span id="modal-tag" class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider">TAG</span>
+                </div>
+                
+                <h3 class="text-3xl font-serif font-bold text-gray-900 mb-4 leading-tight" id="modal-title">
+                    Article Title
+                </h3>
+                
+                <div class="flex items-center gap-4 text-gray-500 text-sm font-medium mb-6 pb-6 border-b border-gray-100">
+                    <span id="modal-author" class="flex items-center gap-1"><i data-lucide="user" class="w-4 h-4"></i> Author</span>
+                    <span>•</span>
+                    <span id="modal-time" class="flex items-center gap-1"><i data-lucide="clock" class="w-4 h-4"></i> Time</span>
+                </div>
+
+                <div class="space-y-4 text-gray-700 leading-relaxed text-lg" id="modal-content">
+                    Full content goes here...
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 🟢 ข้อมูลบทความ (เพิ่ม CategoryId และ FullContent)
+        // ==========================================
+        const FEATURED_ARTICLE = {
+            id: 'featured',
+            image: 'https://www.paradise-kohyao.com/wp-content/uploads/2025/04/13.3-%E0%B8%AB%E0%B8%A1%E0%B8%B9%E0%B9%88%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%B0%E0%B8%AA%E0%B8%B4%E0%B8%A1%E0%B8%B4%E0%B8%A5%E0%B8%B1%E0%B8%99-%E0%B8%9E%E0%B8%B1%E0%B8%87%E0%B8%87%E0%B8%B2-1024x683.webp',
+            tag: { TH: 'คู่มือสำคัญ', EN: 'ESSENTIAL GUIDE' },
+            title: { TH: 'คู่มือเที่ยวสิมิลัน: ราชินีแห่งอันดามัน', EN: 'Similan Islands Guide: Queen of the Andaman' },
+            excerpt: { TH: 'เจาะลึกทุกข้อมูลที่คุณต้องรู้ก่อนไปสัมผัสหาดทรายขาวละเอียดราวกับแป้ง และจุดดำน้ำตื้นที่สวยที่สุดในประเทศไทย', EN: 'An in-depth guide to the powdery white sand beaches and the best snorkeling spots in Thailand.' },
+            author: { TH: 'SouthVibes Editors', EN: 'SouthVibes Editors' },
+            time: { TH: 'อ่าน 8 นาที', EN: '8 min read' },
+            fullContent: {
+                TH: '<p>หมู่เกาะสิมิลันได้รับการยกย่องให้เป็นหนึ่งในหมู่เกาะที่สวยงามที่สุดในโลก ด้วยน้ำทะเลสีฟ้าใสแจ๋วระดับคริสตัลและหาดทรายที่ขาวละเอียดราวกับผงแป้ง</p><br><p><strong>การเดินทาง:</strong> ต้องเดินทางด้วยสปีดโบ๊ทจากท่าเรือทับละมุ จังหวัดพังงา ใช้เวลาประมาณ 1.5 - 2 ชั่วโมง</p><br><p><strong>จุดไฮไลท์:</strong><br>- หินเรือใบ (เกาะ 8): สัญลักษณ์ของสิมิลันที่ต้องปีนขึ้นไปถ่ายรูป<br>- จุดดำน้ำเกาะ 9: แหล่งรวมปะการังและมีโอกาสเจอเต่าทะเลสูงมาก</p><br><p><em>ข้อควรระวัง:</em> อุทยานจะเปิดให้เข้าชมเพียงแค่ช่วง 15 ต.ค. - 15 พ.ค. ของทุกปีเท่านั้น เพื่อให้ธรรมชาติได้ฟื้นฟู</p>',
+                EN: '<p>The Similan Islands are praised as one of the most beautiful archipelagos in the world, featuring crystal-clear blue waters and powdery white sand.</p><br><p><strong>How to get there:</strong> You need to take a speedboat from Thap Lamu Pier in Phang Nga, taking about 1.5 - 2 hours.</p><br><p><strong>Highlights:</strong><br>- Sailboat Rock (Island 8): The icon of Similan. Climb up for a breathtaking view.<br>- Snorkeling at Island 9: Great coral reefs and a high chance to spot sea turtles.</p><br><p><em>Note:</em> The national park is open to visitors only from Oct 15 - May 15 every year to allow nature to recover.</p>'
+            }
+        };
+
+        const ARTICLES = [
+            {
+                id: 1,
+                categoryId: 'food',
+                image: 'https://yala.prd.go.th/th/file/get/file/20210423d41d8cd98f00b204e9800998ecf8427e121638.jpg',
+                tag: { TH: 'อาหารท้องถิ่น', EN: 'LOCAL EATS' },
+                title: { TH: 'ตะลุยกินย่านเมืองเก่าสงขลา ของอร่อยที่ซ่อนตัวในตึกเก่า', EN: 'Songkhla Old Town Food Tour: Hidden Gems in Heritage Buildings' },
+                excerpt: { TH: 'พาสัมผัสเสน่ห์เมืองเก่าสงขลาผ่านรสชาติอาหาร ตั้งแต่ไอติมโอ่ง สตูว์หมู ไปจนถึงคาเฟ่สุดชิค', EN: 'Experience the charm of Songkhla through its flavors, from traditional ice cream to chic cafes.' },
+                author: 'FoodieTraveller',
+                readTime: { TH: 'อ่าน 5 นาที', EN: '5 min read' },
+                fullContent: {
+                    TH: '<p>ย่านเมืองเก่าสงขลา ถนนนางงาม ไม่ได้มีดีแค่สตรีทอาร์ต แต่ยังเป็นแหล่งรวมร้านอาหารระดับตำนานที่เปิดมายาวนานหลายสิบปี</p><br><p><strong>ร้านเด็ดที่ต้องลอง:</strong><br>1. <strong>เกียดฟั่ง:</strong> ร้านสตูว์หมูสูตรโบราณ น้ำซุปเข้มข้น กินคู่กับหมูกรอบและซาลาเปาลูกโต<br>2. <strong>ไอติมโอ่ง:</strong> ไอศกรีมกะทิโฮมเมดใส่ไข่ เสิร์ฟในโอ่งดินเผาใบเล็กสุดคลาสสิก<br>3. <strong>ขนมไข่เตาถ่าน:</strong> หอมกลิ่นเนยและเตาถ่าน กรอบนอกนุ่มใน</p><p>นอกจากนี้ยังมีคาเฟ่สมัยใหม่ที่รีโนเวทจากตึกเก่าให้เราได้แวะนั่งพักเหนื่อยจิบกาแฟอีกด้วย</p>',
+                    EN: '<p>Nang Ngam Road in Songkhla Old Town isn\'t just about street art; it\'s a hub of legendary local restaurants operating for decades.</p><br><p><strong>Must-Try Spots:</strong><br>1. <strong>Kiat Fang:</strong> Famous for traditional pork stew served with crispy pork and giant steamed buns.<br>2. <strong>Ong Ice Cream:</strong> Homemade coconut ice cream with raw egg yolk, served in a classic mini clay pot.<br>3. <strong>Charcoal-baked Egg Cakes:</strong> Fragrant, crispy on the outside, soft on the inside.</p><p>There are also many modern cafes renovated from old heritage buildings to relax and grab a coffee.</p>'
+                }
+            },
+            {
+                id: 2,
+                categoryId: 'hidden',
+                image: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?q=80&w=800&auto=format&fit=crop',
+                tag: { TH: 'สถานที่ลับ', EN: 'HIDDEN GEMS' },
+                title: { TH: 'ป่าต้นน้ำบ้านน้ำราด สุราษฎร์ธานี: โอเอซิสกลางป่าลึก', EN: 'Ban Nam Rad, Surat Thani: An Oasis in the Deep Forest' },
+                excerpt: { TH: 'หลีกหนีความวุ่นวาย ไปแช่น้ำจืดใสแจ๋วราวกับกระจก ท่ามกลางธรรมชาติที่ยังคงความอุดมสมบูรณ์', EN: 'Escape the chaos and soak in crystal clear freshwater surrounded by abundant nature.' },
+                author: 'WanderBoy',
+                readTime: { TH: 'อ่าน 4 นาที', EN: '4 min read' },
+                fullContent: {
+                    TH: '<p>หากคุณเบื่อน้ำทะเล "ป่าต้นน้ำ บ้านน้ำราด" คือคำตอบ! ที่นี่คือสระน้ำจืดธรรมชาติที่ซ่อนตัวอยู่กลางป่าในอำเภอคีรีรัฐนิคม จังหวัดสุราษฎร์ธานี</p><br><p>น้ำที่นี่ใสแจ๋วราวกับกระจกจนมองเห็นพื้นทรายและฝูงปลาตัวเล็กๆ ได้อย่างชัดเจน น้ำเย็นชื่นใจมาก เหมาะกับการมาแช่ตัวคลายร้อน</p><br><p>ชาวบ้านในพื้นที่ช่วยกันดูแลรักษาความสะอาดเป็นอย่างดี ไม่อนุญาตให้นำอาหารและเครื่องดื่มที่ก่อให้เกิดขยะเข้าไปในบริเวณสระน้ำ ถือเป็นโอเอซิสที่บริสุทธิ์จริงๆ</p>',
+                    EN: '<p>If you\'re tired of seawater, "Ban Nam Rad Headwaters" is the answer! It\'s a natural freshwater spring hidden in the forest of Khiri Rat Nikhom District, Surat Thani.</p><br><p>The water is crystal clear like a mirror, allowing you to clearly see the sandy bottom and small schools of fish. The water is refreshingly cool, perfect for a dip to escape the heat.</p><br><p>The local community takes great care of the area. Bringing food and disposable drinks to the pool area is prohibited, keeping this oasis incredibly pure.</p>'
+                }
+            },
+            {
+                id: 3,
+                categoryId: 'guide',
+                image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800&auto=format&fit=crop',
+                tag: { TH: 'กิจกรรมแอดเวนเจอร์', EN: 'ADVENTURE' },
+                title: { TH: 'สวรรค์ของนักดำน้ำ: ทำไมใครๆ ก็ไปเรียนดำน้ำที่เกาะเต่า?', EN: 'Diver\'s Paradise: Why Everyone Learns to Dive in Koh Tao' },
+                excerpt: { TH: 'รีวิวประสบการณ์เรียนดำน้ำ Open Water ครั้งแรกที่เกาะเต่า พร้อมลายแทงโรงเรียนสอนดำน้ำราคาดี', EN: 'Review of an Open Water diving experience in Koh Tao, plus a guide to the best diving schools.' },
+                author: 'DivingDiary',
+                readTime: { TH: 'อ่าน 7 นาที', EN: '7 min read' },
+                fullContent: {
+                    TH: '<p>เกาะเต่าเป็นที่รู้จักในฐานะ "โรงเรียนสอนดำน้ำของโลก" เพราะที่นี่ผลิตนักดำน้ำหน้าใหม่เยอะที่สุดแห่งหนึ่ง</p><br><p><strong>ทำไมต้องเกาะเต่า?</strong><br>- <strong>ราคาถูก:</strong> คอร์ส Open Water ที่นี่ราคาเป็นมิตรมาก เริ่มต้นเพียงหลักพันปลายๆ<br>- <strong>ทะเลสงบ:</strong> กระแสน้ำไม่แรงมาก เหมาะสำหรับมือใหม่หัดดำน้ำ<br>- <strong>สิ่งมีชีวิตใต้ทะเล:</strong> คุณมีโอกาสเจอเต่าทะเล ปลาวัว และแม้กระทั่งฉลามวาฬ (ถ้าโชคดี) ตั้งแต่ช่วงเรียนเลยทีเดียว</p><br><p>แนะนำให้หาโรงเรียนที่มีครูสอนภาษาไทยหากคุณยังไม่ชินกับศัพท์เฉพาะใต้น้ำครับ</p>',
+                    EN: '<p>Koh Tao is known globally as the "Diving School of the World" because it certifies one of the highest numbers of new divers annually.</p><br><p><strong>Why Koh Tao?</strong><br>- <strong>Affordability:</strong> Open Water courses here are very budget-friendly.<br>- <strong>Calm Waters:</strong> The currents are generally mild, making it perfect for beginners.<br>- <strong>Marine Life:</strong> You have a high chance of spotting sea turtles, triggerfish, and even whale sharks (if lucky) right during your training.</p><br><p>It\'s highly recommended to choose a school with instructors who speak your native language to better grasp underwater terminology.</p>'
+                }
+            },
+            {
+                id: 4,
+                categoryId: 'culture',
+                image: 'https://images.unsplash.com/photo-1590523278191-995cbcda646b?q=80&w=800&auto=format&fit=crop',
+                tag: { TH: 'ศิลปวัฒนธรรม', EN: 'CULTURE & HISTORY' },
+                title: { TH: 'เดินเล่นหลงยุค สถาปัตยกรรมชิโน-โปรตุกีส เมืองภูเก็ต', EN: 'Lost in Time: Sino-Portuguese Architecture in Phuket' },
+                excerpt: { TH: 'ทำความรู้จักประวัติศาสตร์ผ่านตึกเก่าสีพาสเทล ที่ผสมผสานศิลปะตะวันตกและตะวันออกได้อย่างลงตัว', EN: 'Discover history through pastel-colored heritage buildings blending Western and Eastern art.' },
+                author: 'SouthVibes Editors',
+                readTime: { TH: 'อ่าน 6 นาที', EN: '6 min read' },
+                fullContent: {
+                    TH: '<p>ย่านเมืองเก่าภูเก็ตไม่ได้มีแค่สีสันสวยงามไว้ถ่ายรูป แต่ยังแฝงไปด้วยประวัติศาสตร์ยุคเหมืองแร่เฟื่องฟู</p><br><p>สถาปัตยกรรม <strong>ชิโน-โปรตุกีส (Sino-Portuguese)</strong> เป็นการผสมผสานระหว่างศิลปะตะวันตก (โปรตุเกส/อังกฤษ) และศิลปะตะวันออก (จีนฮกเกี้ยน) ตัวอาคารมักมีช่องทางเดินหน้าบ้านที่เรียกว่า "หง่อกากี่" เพื่อบังแดดบังฝน</p><br><p>ถนนที่พลาดไม่ได้คือ <strong>ถนนถลาง ถนนพังงา และซอยรมณีย์</strong> นอกจากจะได้ชมตึกสวยๆ แล้ว ยังมีร้านอาหารพื้นเมืองเก่าแก่ที่สืบทอดสูตรจากบรรพบุรุษชาวจีนให้ลิ้มลองอีกมากมาย</p>',
+                    EN: '<p>Phuket Old Town isn\'t just colorful backgrounds for photos; it holds the rich history of the tin mining boom era.</p><br><p>The <strong>Sino-Portuguese</strong> architecture is a perfect blend of Western (Portuguese/British) and Eastern (Hokkien Chinese) art. Buildings typically feature a continuous covered walkway at the front called "Ngo Ka Kee" to protect from sun and rain.</p><br><p>Must-visit streets include <strong>Thalang, Phang Nga, and Soi Romanee</strong>. Besides admiring the buildings, you can taste authentic local cuisine passed down from Chinese ancestors in long-standing family restaurants.</p>'
+                }
+            },
+            {
+                id: 5,
+                categoryId: 'guide',
+                image: 'https://www.guilinlake.com/images/2017/12/07511220170417677721-guilinlake-400x300.jpg',
+                tag: { TH: 'คู่มือสำคัญ', EN: 'ESSENTIAL GUIDE' },
+                title: { TH: 'แพลนเที่ยวเกาะสมุย 3 วัน 2 คืน ฉบับอัปเดตล่าสุด', EN: 'Koh Samui 3D2N Itinerary: Latest Update' },
+                excerpt: { TH: 'รวมพิกัดที่พัก คาเฟ่ และจุดชมวิวที่สวยที่สุดในสมุย พร้อมวิธีการเดินทางข้ามเกาะแบบละเอียด', EN: 'Top accommodations, cafes, and viewpoints in Samui, complete with island-hopping logistics.' },
+                author: 'SamuiLover',
+                readTime: { TH: 'อ่าน 10 นาที', EN: '10 min read' },
+                fullContent: {
+                    TH: '<p>เกาะสมุยเดินทางง่ายกว่าที่คิด! หากมีเวลาจำกัด 3 วัน 2 คืน ก็สามารถเที่ยวไฮไลท์ได้ครบ</p><br><p><strong>วันที่ 1:</strong> บินตรงลงสมุย เช่ารถมอเตอร์ไซค์ขับรอบเกาะ แวะหินตาหินยาย และจบวันด้วยการทานอาหารเย็นที่ Fisherman\'s Village Bophut</p><p><strong>วันที่ 2:</strong> ซื้อ One Day Trip นั่งสปีดโบ๊ทไปหมู่เกาะอ่างทอง พายคายัค และชมทะเลใน</p><p><strong>วันที่ 3:</strong> ไหว้พระใหญ่ แวะคาเฟ่ริมหาดชางเวงก่อนเดินทางกลับ</p><br><p><em>Tip:</em> ช่วงเวลาที่ดีที่สุดในการเที่ยวสมุยคือเดือนกุมภาพันธ์ - สิงหาคม เพราะคลื่นลมสงบและฝนน้อยครับ</p>',
+                    EN: '<p>Koh Samui is easier to travel to than you think! Even with a limited 3 Days 2 Nights, you can cover all the highlights.</p><br><p><strong>Day 1:</strong> Fly direct to Samui, rent a scooter. Visit Hin Ta Hin Yai rocks, and end the day with dinner at Fisherman\'s Village Bophut.</p><p><strong>Day 2:</strong> Join a One-Day Trip speedboat to Ang Thong National Marine Park. Go kayaking and hike to the Emerald Lake viewpoint.</p><p><strong>Day 3:</strong> Visit the Big Buddha, relax at a beachfront cafe in Chaweng, and head home.</p><br><p><em>Tip:</em> The best time to visit Samui is from February to August when the sea is calm and rain is minimal.</p>'
+                }
+            },
+            {
+                id: 6,
+                categoryId: 'food',
+                image: 'https://img.wongnai.com/p/1920x0/2022/04/24/3059a65f0415474d889bd3a1db85123c.jpg',
+                tag: { TH: 'ไลฟ์สไตล์', EN: 'LIFESTYLE' },
+                title: { TH: '3 คาเฟ่ริมทะเลกระบี่ วิวหลักล้าน เครื่องดื่มหลักร้อย', EN: '3 Krabi Beachfront Cafes: Million-Dollar Views' },
+                excerpt: { TH: 'ชี้เป้าคาเฟ่สำหรับสายคอนเทนต์ นั่งจิบกาแฟดูพระอาทิตย์ตกดิน มุมถ่ายรูปเพียบ', EN: 'Content creator\'s guide to beachfront cafes. Sip coffee, watch the sunset, and take great photos.' },
+                author: 'CafeHopperTH',
+                readTime: { TH: 'อ่าน 4 นาที', EN: '4 min read' },
+                fullContent: {
+                    TH: '<p>มากระบี่ทั้งที นอกจากเที่ยวเกาะแล้ว การได้นั่งจิบกาแฟหรือค็อกเทลมองพระอาทิตย์ตกดินริมหาดก็ฟินไม่แพ้กัน</p><br><p>ร้านที่เราคัดมาให้ล้วนตั้งอยู่ริมหาดอ่าวนางและหาดทับแขก:<br>1. <strong>Dragon View:</strong> วิวภูเขาหินปูนอลังการมาก<br>2. <strong>Andamana Cafe:</strong> ฟีลบาหลี มีเปลตาข่ายให้นอนชิล<br>3. <strong>The Beach:</strong> บาร์ริมหาดที่เปิดเพลงสไตล์ Tropical House นั่งยาวๆ ได้จนถึงค่ำ</p><br><p>เตรียมชุดพลิ้วๆ และกล้องถ่ายรูปให้พร้อม รับรองว่าได้รูปกลับไปลงโซเชียลเป็นเดือนแน่นอน!</p>',
+                    EN: '<p>When in Krabi, besides island hopping, sipping coffee or a cocktail while watching the sunset by the beach is equally satisfying.</p><br><p>Our top picks are located along Ao Nang and Tubkaek beaches:<br>1. <strong>Dragon View:</strong> Offers majestic limestone mountain views.<br>2. <strong>Andamana Cafe:</strong> Bali vibes with relaxing hammock nets over the sand.<br>3. <strong>The Beach:</strong> A beachfront bar playing Tropical House music, perfect for chilling until late night.</p><br><p>Prepare your flowy dresses and cameras; you\'ll definitely get enough photos to post for a month!</p>'
+                }
+            }
+        ];
+
+        let currentLang = 'TH';
+        let currentFilter = 'all';
+
+        // ==========================================
+        // 🟢 ระบบจัดการการล็อกอิน
+        // ==========================================
+        function checkLoginStatus() {
+            const savedProfile = localStorage.getItem("southvibes_profile");
+            const savedUser = localStorage.getItem("loggedInUser");
+            
+            if (savedProfile) {
+                const userProfile = JSON.parse(savedProfile);
+                showProfileData(userProfile.name, userProfile.avatar);
+            } 
+            else if (savedUser) {
+                const user = JSON.parse(savedUser);
+                const newProfile = {
+                    name: user.username,
+                    avatar: user.username.charAt(0).toUpperCase(),
+                    dob: '',
+                    bio: ''
+                };
+                localStorage.setItem('southvibes_profile', JSON.stringify(newProfile));
+                showProfileData(newProfile.name, newProfile.avatar);
+            } 
+            else {
+                document.getElementById('nav-btn-login').style.display = 'block';
+                document.getElementById('nav-user-profile').style.display = 'none';
+            }
+        }
+
+        function showProfileData(name, avatar) {
+            document.getElementById('nav-btn-login').style.display = 'none';
+            document.getElementById('nav-user-profile').style.display = 'flex';
+            
+            document.getElementById('user-name-display').innerText = name;
+            
+            const avatarDiv = document.getElementById('user-avatar');
+            if (avatar && avatar.startsWith('http')) {
+                avatarDiv.innerHTML = `<img src="${avatar}" class="w-full h-full object-cover rounded-full">`;
+            } else {
+                avatarDiv.innerHTML = avatar ? avatar.charAt(0).toUpperCase() : 'U';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            localStorage.removeItem("southvibes_profile");
+            window.location.reload(); 
+        }
+
+        // ==========================================
+        // 🟢 ระบบกรองหมวดหมู่ (Category Filter)
+        // ==========================================
+        function setFilter(category) {
+            currentFilter = category;
+            
+            // เปลี่ยนสีปุ่มที่ถูกเลือก
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.id === 'btn-filter-' + category) {
+                    btn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+                    btn.classList.remove('text-gray-500', 'hover:text-gray-900');
+                } else {
+                    btn.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+                    btn.classList.add('text-gray-500', 'hover:text-gray-900');
+                }
+            });
+            
+            renderArticles();
+        }
+
+        // ==========================================
+        // 🟢 เรนเดอร์บทความ
+        // ==========================================
+        function renderArticles() {
+            const container = document.getElementById('articles-container');
+            const byText = currentLang === 'TH' ? 'โดย' : 'By';
+            
+            // กรองบทความ
+            const filteredArticles = currentFilter === 'all' 
+                ? ARTICLES 
+                : ARTICLES.filter(a => a.categoryId === currentFilter);
+                
+            // ซ่อนปุ่มโหลดเพิ่มถ้าไม่มีบทความเหลือให้แสดง
+            document.getElementById('load-more-container').style.display = filteredArticles.length > 0 ? 'flex' : 'none';
+
+            if (filteredArticles.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500">${currentLang === 'TH' ? 'ไม่มีบทความในหมวดหมู่นี้' : 'No articles found in this category.'}</div>`;
+                return;
+            }
+            
+            container.innerHTML = filteredArticles.map(article => `
+                <a href="#" onclick="openArticleModal(${article.id}); return false;" class="group block cursor-pointer flex flex-col h-full bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
+                    <div class="relative h-60 w-full overflow-hidden">
+                        <img src="${article.image}" alt="${article.title[currentLang]}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-blue-600/90 backdrop-blur-sm text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded shadow-sm">
+                                ${article.tag[currentLang]}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-snug mb-3 line-clamp-2">
+                            ${article.title[currentLang]}
+                        </h3>
+                        <p class="text-sm text-gray-600 line-clamp-3 mb-6 flex-grow">
+                            ${article.excerpt[currentLang]}
+                        </p>
+                        <div class="flex items-center justify-between text-xs font-medium text-gray-500 uppercase tracking-wide pt-4 border-t border-gray-100">
+                            <span>${byText} ${article.author}</span>
+                            <span>${article.readTime[currentLang]}</span>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        // ==========================================
+        // 🟢 ระบบ Modal อ่านบทความฉบับเต็ม
+        // ==========================================
+        let currentModalArticleId = null;
+
+        function openArticleModal(id) {
+            // 🟢 เช็กสถานะการเข้าสู่ระบบ
+            if (!localStorage.getItem("loggedInUser") && !localStorage.getItem("southvibes_profile")) {
+                alert(currentLang === 'TH' ? "กรุณาเข้าสู่ระบบก่อนเพื่ออ่านบทความฉบับเต็มครับ" : "Please sign in to read the full article.");
+                window.location.href = "Login.html"; 
+                return;
+            }
+
+            currentModalArticleId = id;
+            updateModalContent();
+            document.getElementById('article-modal').classList.remove('hidden');
+            
+            // Re-render icons inside modal if needed
+            lucide.createIcons();
+        }
+
+        function closeArticleModal() {
+            document.getElementById('article-modal').classList.add('hidden');
+            currentModalArticleId = null;
+        }
+
+        function updateModalContent() {
+            if (!currentModalArticleId) return;
+
+            // หาข้อมูลว่ามาจากไฮไลต์ หรือ จากกริดด้านล่าง
+            let data = currentModalArticleId === 'featured' 
+                ? FEATURED_ARTICLE 
+                : ARTICLES.find(a => a.id === currentModalArticleId);
+
+            if(!data) return;
+
+            const byText = currentLang === 'TH' ? 'โดย' : 'By';
+
+            document.getElementById('modal-tag').innerText = data.tag[currentLang];
+            document.getElementById('modal-title').innerText = data.title[currentLang];
+            document.getElementById('modal-author').innerHTML = `<i data-lucide="user" class="w-4 h-4"></i> ${byText} ${data.author[currentLang] || data.author}`;
+            document.getElementById('modal-time').innerHTML = `<i data-lucide="clock" class="w-4 h-4"></i> ${data.readTime ? data.readTime[currentLang] : data.time[currentLang]}`;
+            document.getElementById('modal-content').innerHTML = data.fullContent[currentLang];
+            document.getElementById('modal-img').src = data.image;
+        }
+
+
+        // ==========================================
+        // 🟢 ระบบแปลภาษา
+        // ==========================================
+        const TRANSLATIONS = {
+            TH: { 
+                nav1: 'แนะนำสถานที่', nav2: 'จุดหมาย', nav3: 'ชุมชน', nav4: 'บทความ', login: 'เข้าสู่ระบบ',
+                catAll: 'ทั้งหมด', catGuide: 'คู่มือท่องเที่ยว', catFood: 'อาหารท้องถิ่น', catHidden: 'สถานที่ลับ', catCulture: 'ศิลปวัฒนธรรม',
+                latestArticles: 'บทความล่าสุด', loadMore: 'โหลดบทความเพิ่มเติม', by: 'โดย',
+                footerDesc: 'เพื่อนร่วมทางที่ดีที่สุดของคุณในการสำรวจสถานที่ลับ ชายหาดที่บริสุทธิ์ และวัฒนธรรมที่มีชีวิตชีวาของภาคใต้', explore: 'สำรวจ', fDest: 'แนะนำสถานที่', fGuides: 'จุดหมายปลายทาง', fForum: 'เว็บบอร์ดชุมชน', about: 'เกี่ยวกับเรา', ourStory: 'เรื่องราวของเรา', contact: 'ติดต่อเรา', terms: 'ข้อตกลงและเงื่อนไข' 
+            },
+            EN: { 
+                nav1: 'Must Visit', nav2: 'Destinations', nav3: 'Community', nav4: 'Articles', login: 'Sign In',
+                catAll: 'All', catGuide: 'Travel Guides', catFood: 'Local Eats', catHidden: 'Hidden Gems', catCulture: 'Culture',
+                latestArticles: 'Latest Articles', loadMore: 'Load More Articles', by: 'By',
+                footerDesc: 'Your ultimate companion for exploring the hidden gems, pristine beaches, and vibrant culture of Southern Thailand.', explore: 'Explore', fDest: 'Must Visit', fGuides: 'Destinations', fForum: 'Community Forum', about: 'About', ourStory: 'Our Story', contact: 'Contact Us', terms: 'Terms of Service' 
+            }
+        };
+
+        function updateFeaturedArticle() {
+            document.getElementById('featured-tag').innerText = FEATURED_ARTICLE.tag[currentLang];
+            document.getElementById('featured-title').innerText = FEATURED_ARTICLE.title[currentLang];
+            document.getElementById('featured-excerpt').innerText = FEATURED_ARTICLE.excerpt[currentLang];
+            document.getElementById('featured-author').innerText = FEATURED_ARTICLE.author[currentLang];
+            document.getElementById('featured-time').innerText = FEATURED_ARTICLE.time[currentLang];
+        }
+
+        function updateApp() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (TRANSLATIONS[currentLang][key]) {
+                    el.textContent = TRANSLATIONS[currentLang][key];
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(el => {
+                if (currentLang === 'TH') {
+                    el.classList.remove('text-sm'); el.classList.add('text-base');
+                } else {
+                    el.classList.remove('text-base'); el.classList.add('text-sm');
+                }
+            });
+
+            document.getElementById('btn-th').classList.toggle('text-gray-900', currentLang === 'TH');
+            document.getElementById('btn-en').classList.toggle('text-gray-900', currentLang === 'EN');
+
+            updateFeaturedArticle();
+            renderArticles(); // อัปเดตภาษาใน grid
+            updateModalContent(); // อัปเดตภาษาใน modal ถ้าเปิดค้างอยู่
+            
+            lucide.createIcons();
+        }
+
+        document.getElementById('btn-th').addEventListener('click', () => { currentLang = 'TH'; updateApp(); });
+        document.getElementById('btn-en').addEventListener('click', () => { currentLang = 'EN'; updateApp(); });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateApp();
+            checkLoginStatus(); 
+        });
+    </script>
+</body>
+</html>

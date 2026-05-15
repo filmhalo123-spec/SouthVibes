@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เว็บบอร์ดชุมชน | SouthVibes</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {  
+            font-family: 'Inter', sans-serif;
+        }
+        .font-serif {
+            font-family: 'Merriweather', serif;
+        }
+        /* Animation สำหรับตอนกางคอมเมนต์ */
+        .thread-expand {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-white text-gray-900 selection:bg-blue-200">
+
+    <nav class="border-b border-gray-200 sticky top-0 bg-white z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+
+                <a href="index.html" class="flex items-center gap-2 cursor-pointer group">
+                    <div class="bg-blue-600 text-white p-2 rounded-full group-hover:bg-blue-700 transition-colors">
+                        <i data-lucide="compass" class="h-6 w-6"></i>
+                    </div>
+                    <span class="font-serif font-bold text-2xl tracking-tight text-gray-900">
+                        South<span class="text-blue-600">Vibes</span>
+                    </span>
+                </a>
+
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html"
+                        class="nav-link text-base font-bold tracking-wide text-gray-900 hover:text-blue-600 transition-colors uppercase"
+                        data-i18n="nav1">แนะนำสถานที่</a>
+                    <a href="Destinations.html"
+                        class="nav-link text-base font-bold tracking-wide text-gray-900 hover:text-blue-600 transition-colors uppercase"
+                        data-i18n="nav2">จุดหมาย</a>
+                    <a href="Community.html"
+                        class="nav-link text-base font-bold tracking-wide text-blue-600 border-b-2 border-blue-600 pb-1 uppercase"
+                        data-i18n="nav3">ชุมชน</a>
+                    <a href="Atcs.html"
+                        class="nav-link text-base font-bold tracking-wide text-gray-900 hover:text-blue-600 transition-colors uppercase"
+                        data-i18n="nav4">บทความ</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div class="hidden sm:flex items-center gap-2 text-sm font-bold text-gray-400 mr-2">
+                        <i data-lucide="globe" class="h-4 w-4 text-gray-900"></i>
+                        <button id="btn-th" class="hover:text-blue-600 transition-colors text-gray-900">TH</button>
+                        <span>/</span>
+                        <button id="btn-en" class="hover:text-blue-600 transition-colors">EN</button>
+                    </div>
+
+                    <a id="nav-btn-login" href="Login.html" class="bg-blue-600 text-white px-5 py-2.5 rounded-full text-sm font-bold tracking-wide hover:bg-blue-700 transition-colors" data-i18n="login">
+                        เข้าสู่ระบบ
+                    </a>
+
+                    <div id="nav-user-profile" class="hidden items-center gap-3">
+                        <a href="profile.html" class="flex items-center gap-2 bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200 cursor-pointer hover:bg-gray-200 transition-colors" title="แก้ไขโปรไฟล์">
+                            <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex justify-center items-center font-bold text-sm overflow-hidden" id="user-avatar">S</div>
+                            <span class="font-bold text-sm text-gray-800 hidden md:block mr-2" id="user-name-display"></span>
+                        </a>
+                        <button onclick="logout()" class="text-sm font-bold text-red-500 hover:text-red-700 transition-colors bg-red-50 px-3 py-2 rounded-full hover:bg-red-100">
+                            ออกจากระบบ
+                            <a href = Community.html></a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="relative h-[60vh] min-h-[500px] flex items-center justify-center">
+        <div class="absolute inset-0 w-full h-full">
+            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=2000&auto=format&fit=crop"
+                alt="Southern Thailand" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-black/40"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto w-full">
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 drop-shadow-lg" data-i18n="hero1">
+                มนต์เสน่ห์แดนใต้
+            </h1>
+            <p class="text-lg md:text-xl text-white/90 font-medium mb-10 drop-shadow-md" data-i18n="hero2">
+                ค้นพบเกาะสวยลับตา ร้านอาหารท้องถิ่น และร่วมแบ่งปันประสบการณ์กับนักเดินทาง
+            </p>
+        </div>
+    </div>
+
+    <div class="border-b border-gray-200 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <h2 class="text-xs font-bold tracking-widest text-gray-500 uppercase mb-4 text-center" data-i18n="pop">
+                จุดหมายยอดนิยม</h2>
+            <div id="destinations-container" class="flex flex-wrap justify-center gap-4 md:gap-8">
+                </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+
+            <div class="col-span-1 lg:col-span-8">
+                <div class="flex justify-between items-end mb-8 border-b border-gray-900 pb-4">
+                    <div>
+                        <h2 class="text-3xl font-serif font-bold text-gray-900" data-i18n="board1">เว็บบอร์ดพูดคุย</h2>
+                        <p class="text-gray-500 mt-2" data-i18n="board2">ร่วมพูดคุย สอบถามข้อมูล
+                            และแบ่งปันเทคนิคการเดินทาง</p>
+                    </div>
+                    <button onclick="openNewThreadModal()"
+                        class="hidden sm:flex items-center gap-1 text-sm font-bold text-blue-600 hover:text-blue-800 cursor-pointer">
+                        <span data-i18n="newTopic">ตั้งกระทู้ใหม่</span> <i data-lucide="chevron-right"
+                            class="h-4 w-4"></i>
+                    </button>
+                </div>
+
+                <div id="threads-container" class="divide-y divide-gray-200">
+                </div>
+
+                <button
+                    class="mt-8 w-full py-4 border-2 border-gray-900 text-gray-900 font-bold tracking-wide uppercase text-sm hover:bg-gray-900 hover:text-white transition-colors"
+                    data-i18n="viewAll">
+                    ดูกระทู้ทั้งหมด
+                </button>
+            </div>
+
+            <div class="col-span-1 lg:col-span-4">
+                <h2 class="text-2xl font-serif font-bold text-gray-900 mb-8 border-b border-gray-900 pb-4"
+                    data-i18n="guide1">
+                    บทความแนะนำ
+                </h2>
+
+                <div id="guides-container" class="space-y-8">
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="bg-gray-900 text-white py-16 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="bg-white text-gray-900 p-1.5 rounded-full">
+                        <i data-lucide="compass" class="h-6 w-6"></i>
+                    </div>
+                    <span class="font-serif font-bold text-2xl tracking-tight">
+                        South<span class="text-blue-400">Vibes</span>
+                    </span>
+                </div>
+                <p class="text-gray-400 text-sm max-w-sm" data-i18n="footerDesc">
+                    เพื่อนร่วมทางที่ดีที่สุดของคุณในการสำรวจสถานที่ลับ ชายหาดที่บริสุทธิ์
+                    และวัฒนธรรมที่มีชีวิตชีวาของภาคใต้
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-wider text-sm mb-4" data-i18n="explore">สำรวจ</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="index.html" class="hover:text-white transition-colors"
+                            data-i18n="fDest">แนะนำสถานที่</a></li>
+                    <li><a href="Destinations.html" class="hover:text-white transition-colors"
+                            data-i18n="fGuides">จุดหมายปลายทาง</a></li>
+                    <li><a href="Community.html" class="hover:text-white transition-colors"
+                            data-i18n="fForum">เว็บบอร์ดชุมชน</a></li>
+                    <li><a href="Atcs.html" class="hover:text-white transition-colors"
+                            data-i18n="fAbout">เกี่ยวกับเรา</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-wider text-sm mb-4" data-i18n="about">เกี่ยวกับเรา</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="#" class="hover:text-white transition-colors" data-i18n="ourStory">เรื่องราวของเรา</a>
+                    </li>
+                    <li><a href="#" class="hover:text-white transition-colors" data-i18n="contact">ติดต่อเรา</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors" data-i18n="terms">ข้อตกลงและเงื่อนไข</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <div id="new-thread-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl overflow-hidden">
+            <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                <h3 class="text-xl font-bold font-serif text-gray-900" data-i18n="modalTitle">ตั้งกระทู้ใหม่</h3>
+                <button onclick="closeNewThreadModal()" class="text-gray-400 hover:text-red-500 transition-colors">
+                    <i data-lucide="x" class="h-6 w-6"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2" data-i18n="modalTopic">หัวข้อกระทู้</label>
+                    <input type="text" id="new-thread-topic" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="ระบุหัวข้อที่ต้องการพูดคุย...">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2" data-i18n="modalCategory">หมวดหมู่</label>
+                    <select id="new-thread-category" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700">
+                        <option value="พูดคุย" data-th="พูดคุย" data-en="Discussion">พูดคุย (Discussion)</option>
+                        <option value="คำแนะนำการเดินทาง" data-th="คำแนะนำการเดินทาง" data-en="Travel Advice">คำแนะนำการเดินทาง (Travel Advice)</option>
+                        <option value="รีวิว" data-th="รีวิว" data-en="Reviews">รีวิว (Reviews)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2" data-i18n="modalContent">เนื้อหา</label>
+                    <textarea id="new-thread-content" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="เขียนรายละเอียดกระทู้ของคุณที่นี่..."></textarea>
+                </div>
+            </div>
+            <div class="p-6 bg-gray-50 border-t border-gray-200 flex justify-end gap-3">
+                <button onclick="closeNewThreadModal()" class="px-5 py-2 rounded-lg text-sm font-bold text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 transition-colors" data-i18n="modalCancel">ยกเลิก</button>
+                <button onclick="submitNewThread()" class="px-5 py-2 rounded-lg text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors" data-i18n="modalSubmit">โพสต์กระทู้</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Structures
+        const DESTINATIONS = [
+            { name: { TH: 'ภูเก็ต', EN: 'Phuket' }, image: 'https://static.thairath.co.th/media/dFQROr7oWzulq5Fa6rpUAJ54LpJHlCam0RYXxsoeLpEdgcExN2D3oySvrz6pf1RRbEC.jpg' },
+            { name: { TH: 'กระบี่', EN: 'Krabi' }, image: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=400&auto=format&fit=crop' },
+            { name: { TH: 'สงขลา', EN: 'Songkhla' }, image: 'https://img.kapook.com/image/Travel_1/sc.jpg' },
+            { name: { TH: 'สตูล', EN: 'Satun' }, image: 'https://www.kkday.com/th/blog/wp-content/uploads/Tarutao-National-Marine-Park.jpg' },
+            { name: { TH: 'สุราษฎร์ธานี', EN: 'Surat Thani' }, image: 'https://patsornchaitour.com/wp-content/uploads/2023/05/8_%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%B0%E0%B9%80%E0%B8%95%E0%B9%88%E0%B8%B2.jpg' },
+        ];
+
+        const EDITORIAL_GUIDES = [
+            { id: 1, tag: { TH: 'คู่มือสำคัญ', EN: 'ESSENTIAL GUIDE' }, title: { TH: 'คู่มือเที่ยวเกาะหลีเป๊ะ: สวรรค์แห่งทะเลอันดามันใต้', EN: 'Koh Lipe Guide: Paradise of the South Andaman' }, author: 'SouthVibes Editors', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1000&auto=format&fit=crop', excerpt: { TH: 'สำรวจหาดทรายขาวละเอียดและจุดดำน้ำตื้นที่ดีที่สุด พร้อมวิธีเดินทางแบบละเอียด', EN: 'Explore white sand beaches and the best snorkeling spots, with detailed travel info.' } },
+            { id: 2, tag: { TH: 'อาหารท้องถิ่น', EN: 'LOCAL EATS' }, title: { TH: 'ตามรอยสตรีทฟู้ดและติ่มซำ ย่านเมืองเก่าภูเก็ต', EN: 'Street Food & Dim Sum in Phuket Old Town' }, author: 'FoodieTraveller', image: 'https://images.unsplash.com/photo-1559314809-0d155014e29e?q=80&w=1000&auto=format&fit=crop', excerpt: { TH: 'ชิมอาหารพื้นเมืองที่ผสมผสานวัฒนธรรมเปอรานากัน ในบรรยากาศตึกชิโนโปรตุกีส', EN: 'Taste local Peranakan fusion food in the atmosphere of Sino-Portuguese architecture.' } }
+        ];
+
+        let FORUM_THREADS = [
+            {
+                id: 101,
+                topic: { TH: 'อัปเดตสภาพอากาศฝั่งอันดามันช่วงนี้ คลื่นแรงไหมครับ? จะไปกระบี่อาทิตย์หน้า', EN: 'Andaman weather update? Are the waves strong right now? Going to Krabi next week.' },
+                content: { TH: 'พอดีจองตั๋วไว้ล่วงหน้าตั้งนานแล้ว เพิ่งมาเห็นข่าวพายุเข้า ไม่แน่ใจว่าฝั่งกระบี่ (อ่าวนาง, เกาะพีพี) คลื่นแรงจนออกเรือไม่ได้เลยไหมครับ? ใครอยู่พื้นที่อัปเดตหน่อยครับ', EN: 'Booked tickets a long time ago and just saw the storm news. Is it too dangerous to take a boat to Phi Phi islands right now? Any locals can update?' },
+                author: 'WanderBoy',
+                time: { TH: '2 ชั่วโมงที่แล้ว', EN: '2 hours ago' },
+                category: { TH: 'คำแนะนำการเดินทาง', EN: 'Travel Advice' },
+                comments: [
+                    { author: 'KrabiLocal', time: { TH: '1 ชั่วโมงที่แล้ว', EN: '1 hour ago' }, text: { TH: 'วันนี้อ่าวนางฟ้าเปิดครับ แต่คลื่นยังมีบ้าง ถ้านั่งสปีดโบ๊ทจะกระแทกหน่อย กินยาแก้เมามาด้วยนะครับ', EN: 'Sky is clear today at Ao Nang but still some waves. Take motion sickness pills if taking a speedboat.' } },
+                    { author: 'SeaLover', time: { TH: '30 นาทีที่แล้ว', EN: '30 mins ago' }, text: { TH: 'พึ่งกลับมาจากพีพีเมื่อวานค่ะ นั่งเรือใหญ่ปลอดภัยดีค่ะ ไม่น่ากลัวอย่างที่คิด เที่ยวให้สนุกนะคะ!', EN: 'Just returned from Phi Phi yesterday. Big ferry is safe. Have a good trip!' } }
+                ]
+            },
+            {
+                id: 105,
+                topic: { TH: '[รีวิว] หนีร้อนไปนอนแพ เขาสก สุราษฎร์ธานี น้ำใสจนใจเจ็บ', EN: '[Review] Escaping the heat to Khao Sok floating rafts. Unbelievably clear water!' },
+                content: { TH: 'วันหยุดยาวที่ผ่านมาหนีไปพักผ่อนที่เขื่อนเชี่ยวหลานมาครับ บรรยากาศเงียบสงบมาก ตัดขาดจากโลกภายนอก (เพราะไม่มีสัญญาณมือถือ 555) ตื่นเช้ามามีหมอกลอยเหนือน้ำเลยครับ คุ้มค่ามาก', EN: 'Went to Cheow Lan Lake during the long weekend. Very peaceful and disconnected from the outside world (no cell signal!). Woke up to morning mist over the water. Totally worth it.' },
+                author: 'SeaAddict99',
+                time: { TH: '8 ชั่วโมงที่แล้ว', EN: '8 hours ago' },
+                category: { TH: 'รีวิว', EN: 'Reviews' },
+                comments: [
+                    { author: 'JaneDoe', time: { TH: '5 ชั่วโมงที่แล้ว', EN: '5 hours ago' }, text: { TH: 'ที่พักชื่ออะไรคะ สนใจมากก ค่าเสียหายประมาณเท่าไหร่คะ', EN: 'What is the name of the raft house? Very interested!' } },
+                    { author: 'SeaAddict99', time: { TH: '4 ชั่วโมงที่แล้ว', EN: '4 hours ago' }, text: { TH: 'พักที่แพ 500 ไร่ครับ ซื้อแพคเกจ 3 วัน 2 คืน คุ้มๆ เลย', EN: 'Stayed at Panvaree Resort. Bought a 3D2N package, very worth it.' } },
+                    { author: 'NatureGuy', time: { TH: '1 ชั่วโมงที่แล้ว', EN: '1 hour ago' }, text: { TH: 'น้ำใสจริงๆ ครับ คอนเฟิร์ม เพิ่งไปมาเดือนที่แล้วเหมือนกัน', EN: 'Water is really clear. Can confirm, just went there last month.' } }
+                ]
+            },
+            {
+                id: 106,
+                topic: { TH: 'ผิดหวังกับร้านอาหารดังริมหาดป่าตอง... ใครมีร้านลับๆ ของคนท้องถิ่นแนะนำบ้างครับ', EN: 'Disappointed with a famous restaurant in Patong... Any hidden local gems?' },
+                content: { TH: 'ไปกินตามรีวิวมาครับ ราคาแรงมาก แต่รสชาติเฉยๆ แถมอาหารทะเลไม่ค่อยสดด้วย รู้สึกเสียดายเงินครับ พรุ่งนี้อยากได้ร้านที่คนท้องถิ่นกินกันจริงๆ รบกวนแนะนำทีครับ', EN: 'Ate at a highly reviewed place but it was expensive and mediocre. Seafood wasn\'t fresh. Tomorrow I want to eat where locals eat. Please recommend!' },
+                author: 'FoodieTraveller',
+                time: { TH: '1 วันที่แล้ว', EN: '1 day ago' },
+                category: { TH: 'พูดคุย', EN: 'Discussion' },
+                comments: [
+                    { author: 'PhuketBoy', time: { TH: '20 ชั่วโมงที่แล้ว', EN: '20 hours ago' }, text: { TH: 'แนะนำให้ขับรถเข้ามาในตัวเมืองภูเก็ตครับ ของอร่อยราคาถูกเพียบเลย ลองไปแถวย่านเมืองเก่าดูครับ', EN: 'Recommend driving into Phuket town. Lots of cheap and delicious food in the Old Town area.' } }
+                ]
+            }
+        ];
+
+        const TRANSLATIONS = {
+            TH: {
+                nav1: 'แนะนำสถานที่', nav2: 'จุดหมาย', nav3: 'ชุมชน', nav4: 'บทความ', login: 'เข้าสู่ระบบ',
+                hero1: 'มนต์เสน่ห์แดนใต้', hero2: 'ค้นพบเกาะสวยลับตา ร้านอาหารท้องถิ่น และร่วมแบ่งปันประสบการณ์กับนักเดินทาง',
+                searchLabel: 'คุณอยากไปเที่ยวที่ไหนในภาคใต้?', searchBtn: 'ค้นหา', pop: 'จุดหมายยอดนิยม',
+                board1: 'เว็บบอร์ดพูดคุย', board2: 'ร่วมพูดคุย สอบถามข้อมูล และแบ่งปันเทคนิคการเดินทาง', newTopic: 'ตั้งกระทู้ใหม่', viewAll: 'ดูกระทู้ทั้งหมด',
+                guide1: 'บทความแนะนำ', news1: 'รับแรงบันดาลใจการเดินทาง', news2: 'สมัครรับข่าวสารเพื่อค้นพบสิ่งที่ดีที่สุดในภาคใต้', subscribe: 'ติดตามข่าวสาร', emailPlaceholder: 'กรอกอีเมลของคุณ',
+                postedBy: 'โพสต์โดย', commentsTitle: 'ความคิดเห็น', replyPlaceholder: 'เขียนความคิดเห็นของคุณ...', sendBtn: 'ส่ง', by: 'โดย',
+                footerDesc: 'เพื่อนร่วมทางที่ดีที่สุดของคุณในการสำรวจสถานที่ลับ ชายหาดที่บริสุทธิ์ และวัฒนธรรมที่มีชีวิตชีวาของภาคใต้', explore: 'สำรวจ', fDest: 'แนะนำสถานที่', fGuides: 'จุดหมายปลายทาง', fForum: 'เว็บบอร์ดชุมชน', about: 'เกี่ยวกับเรา', ourStory: 'เรื่องราวของเรา', contact: 'ติดต่อเรา', terms: 'ข้อตกลงและเงื่อนไข',
+                modalTitle: 'ตั้งกระทู้ใหม่', modalTopic: 'หัวข้อกระทู้', modalCategory: 'หมวดหมู่', modalContent: 'เนื้อหา', modalCancel: 'ยกเลิก', modalSubmit: 'โพสต์กระทู้'
+            },
+            EN: {
+                nav1: 'Must Visit', nav2: 'Destinations', nav3: 'Community', nav4: 'Articles', login: 'Sign In',
+                hero1: 'Explore the South.', hero2: 'Discover breathtaking islands, hidden local spots, and join the community of travelers.',
+                searchLabel: 'Where do you want to go in Southern Thailand?', searchBtn: 'Search', pop: 'Popular Destinations',
+                board1: 'Community Board', board2: 'Join the conversation. Ask questions, share tips, and connect with other travelers.', newTopic: 'New Topic', viewAll: 'View All Topics',
+                guide1: 'Featured Guides', news1: 'Get Travel Inspiration', news2: 'Sign up for our newsletter and discover the best of the South.', subscribe: 'Subscribe', emailPlaceholder: 'Email address',
+                postedBy: 'Posted by', commentsTitle: 'Comments', replyPlaceholder: 'Write a comment...', sendBtn: 'Send', by: 'By',
+                footerDesc: 'Your ultimate companion for exploring the hidden gems, pristine beaches, and vibrant culture of Southern Thailand.', explore: 'Explore', fDest: 'Must Visit', fGuides: 'Destinations', fForum: 'Community Forum', about: 'About', ourStory: 'Our Story', contact: 'Contact Us', terms: 'Terms of Service',
+                modalTitle: 'Create New Topic', modalTopic: 'Topic Title', modalCategory: 'Category', modalContent: 'Content Details', modalCancel: 'Cancel', modalSubmit: 'Post Topic'
+            }
+        };
+
+        let currentLang = 'TH';
+
+        // ==========================================
+        // 🟢 ระบบจัดการการล็อกอิน (ซิงค์กับหน้า Profile)
+        // ==========================================
+        function checkLoginStatus() {
+            const savedProfile = localStorage.getItem("southvibes_profile");
+            const savedUser = localStorage.getItem("loggedInUser");
+            
+            if (savedProfile) {
+                const userProfile = JSON.parse(savedProfile);
+                showProfileData(userProfile.name, userProfile.avatar);
+            } 
+            else if (savedUser) {
+                const user = JSON.parse(savedUser);
+                const newProfile = {
+                    name: user.username,
+                    avatar: user.username.charAt(0).toUpperCase(),
+                    dob: '',
+                    bio: ''
+                };
+                localStorage.setItem('southvibes_profile', JSON.stringify(newProfile));
+                showProfileData(newProfile.name, newProfile.avatar);
+            } 
+            else {
+                document.getElementById('nav-btn-login').style.display = 'block';
+                document.getElementById('nav-user-profile').style.display = 'none';
+            }
+        }
+
+        function showProfileData(name, avatar) {
+            document.getElementById('nav-btn-login').style.display = 'none';
+            document.getElementById('nav-user-profile').style.display = 'flex';
+            
+            document.getElementById('user-name-display').innerText = name;
+            
+            const avatarDiv = document.getElementById('user-avatar');
+            if (avatar && avatar.startsWith('http')) {
+                avatarDiv.innerHTML = `<img src="${avatar}" class="w-full h-full object-cover rounded-full">`;
+            } else {
+                avatarDiv.innerHTML = avatar ? avatar.charAt(0).toUpperCase() : 'U';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            localStorage.removeItem("southvibes_profile");
+            window.location.reload(); 
+        }
+
+        function renderDestinations() {
+            const container = document.getElementById('destinations-container');
+            container.innerHTML = DESTINATIONS.map(dest => `
+                <button class="group flex flex-col items-center gap-2">
+                    <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-transparent group-hover:border-blue-600 transition-all p-0.5">
+                        <img src="${dest.image}" alt="${dest.name[currentLang]}" class="w-full h-full object-cover rounded-full" />
+                    </div>
+                    <span class="text-sm font-semibold text-gray-700 group-hover:text-blue-600">${dest.name[currentLang]}</span>
+                </button>
+            `).join('');
+        }
+
+        function toggleThread(id) {
+            const contentDiv = document.getElementById(`thread-content-${id}`);
+            const icon = document.getElementById(`thread-icon-${id}`);
+
+            if (contentDiv.classList.contains('hidden')) {
+                contentDiv.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                contentDiv.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function renderThreads() {
+            const container = document.getElementById('threads-container');
+            const postedByText = TRANSLATIONS[currentLang].postedBy;
+            const commentsTitle = TRANSLATIONS[currentLang].commentsTitle;
+            const replyPlaceholder = TRANSLATIONS[currentLang].replyPlaceholder;
+            const sendBtn = TRANSLATIONS[currentLang].sendBtn;
+
+            container.innerHTML = FORUM_THREADS.map(thread => `
+                <div class="py-6 border-b border-gray-100 group">
+                    <div class="flex items-start justify-between gap-4 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors" onclick="toggleThread(${thread.id})">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="px-2.5 py-0.5 rounded text-xs font-bold tracking-wider uppercase bg-blue-100 text-blue-700">
+                                    ${thread.category[currentLang]}
+                                </span>
+                                <span class="text-xs text-gray-400">•</span>
+                                <span class="text-xs text-gray-500 font-medium">${postedByText} <span class="text-gray-900">${thread.author}</span> ${thread.time[currentLang]}</span>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
+                                ${thread.topic[currentLang]}
+                            </h3>
+                        </div>
+                        <div class="flex flex-col items-center justify-center w-16 h-16 bg-gray-50 rounded-lg border border-gray-100 transition-colors">
+                            <i data-lucide="message-square" class="h-5 w-5 text-gray-400 mb-1"></i>
+                            <span class="text-xs font-bold text-gray-700">${thread.comments.length}</span>
+                        </div>
+                        <div class="flex items-center h-16">
+                            <i data-lucide="chevron-down" id="thread-icon-${thread.id}" class="h-5 w-5 text-gray-400 transition-transform duration-300"></i>
+                        </div>
+                    </div>
+
+                    <div id="thread-content-${thread.id}" class="hidden mt-4 bg-gray-50 p-6 rounded-xl border border-gray-200 thread-expand">
+                        <div class="mb-6 pb-6 border-b border-gray-200">
+                            <p class="text-gray-800 leading-relaxed">${thread.content[currentLang]}</p>
+                        </div>
+                        
+                        <h4 class="font-bold text-sm text-gray-900 mb-4">${commentsTitle} (${thread.comments.length})</h4>
+                        <div class="space-y-4 mb-6">
+                            ${thread.comments.map(c => `
+                                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold shadow-inner">
+                                            ${c.author.charAt(0)}
+                                        </div>
+                                        <span class="text-sm font-bold text-gray-900">${c.author}</span>
+                                        <span class="text-xs text-gray-400">• ${c.time[currentLang]}</span>
+                                    </div>
+                                    <p class="text-sm text-gray-700 pl-10">${c.text[currentLang]}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="flex gap-3 items-center bg-white p-2 rounded-xl border border-gray-200 shadow-sm">
+                            <div class="w-8 h-8 bg-gray-200 text-gray-500 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ml-2">You</div>
+                            <input type="text" placeholder="${replyPlaceholder}" class="flex-1 px-2 py-2 text-sm bg-transparent focus:outline-none">
+                            <button class="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-blue-700 transition-colors shrink-0">${sendBtn}</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function renderGuides() {
+            const container = document.getElementById('guides-container');
+            const byText = TRANSLATIONS[currentLang].by;
+
+            container.innerHTML = EDITORIAL_GUIDES.map(guide => `
+                <div class="group cursor-pointer">
+                    <div class="relative h-64 w-full rounded-none overflow-hidden mb-4">
+                        <img src="${guide.image}" alt="${guide.title[currentLang]}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-blue-600 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 shadow-sm">
+                                ${guide.tag[currentLang]}
+                            </span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-snug mb-2">
+                        ${guide.title[currentLang]}
+                    </h3>
+                    <p class="text-sm text-gray-600 line-clamp-2 mb-3">
+                        ${guide.excerpt[currentLang]}
+                    </p>
+                    <p class="text-xs font-medium text-gray-400 uppercase tracking-wide">
+                        ${byText} ${guide.author}
+                    </p>
+                </div>
+            `).join('');
+        }
+
+        function updateApp() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (TRANSLATIONS[currentLang][key]) {
+                    if (el.tagName === 'INPUT' && (el.type === 'text' || el.type === 'email')) {
+                        el.placeholder = TRANSLATIONS[currentLang][key];
+                    } else {
+                        const icon = el.querySelector('i');
+                        if (icon) {
+                            el.innerHTML = '';
+                            el.appendChild(document.createTextNode(TRANSLATIONS[currentLang][key] + ' '));
+                            el.appendChild(icon);
+                        } else {
+                            el.textContent = TRANSLATIONS[currentLang][key];
+                        }
+                    }
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(el => {
+                if (currentLang === 'TH') {
+                    el.classList.remove('text-sm'); el.classList.add('text-base');
+                } else {
+                    el.classList.remove('text-base'); el.classList.add('text-sm');
+                }
+            });
+
+            document.getElementById('btn-th').classList.toggle('text-gray-900', currentLang === 'TH');
+            document.getElementById('btn-en').classList.toggle('text-gray-900', currentLang === 'EN');
+
+            renderDestinations();
+            renderThreads();
+            renderGuides();
+            lucide.createIcons();
+        }
+
+        function openNewThreadModal() {
+            // เช็คว่าล็อกอินหรือยังก่อนตั้งกระทู้
+            if(!localStorage.getItem("loggedInUser") && !localStorage.getItem("southvibes_profile")) {
+                alert("กรุณาเข้าสู่ระบบก่อนตั้งกระทู้ครับ");
+                window.location.href = "Login.html"; 
+                return;
+            }
+            document.getElementById('new-thread-modal').classList.remove('hidden');
+        }
+
+        function closeNewThreadModal() {
+            document.getElementById('new-thread-modal').classList.add('hidden');
+            document.getElementById('new-thread-topic').value = '';
+            document.getElementById('new-thread-content').value = '';
+            document.getElementById('new-thread-category').selectedIndex = 0;
+        }
+
+        function submitNewThread() {
+            const topic = document.getElementById('new-thread-topic').value.trim();
+            const content = document.getElementById('new-thread-content').value.trim();
+            const categorySelect = document.getElementById('new-thread-category');
+            const selectedOption = categorySelect.options[categorySelect.selectedIndex];
+            
+            const categoryTH = selectedOption.getAttribute('data-th');
+            const categoryEN = selectedOption.getAttribute('data-en');
+
+            if (!topic || !content) {
+                alert(currentLang === 'TH' ? 'กรุณากรอกหัวข้อและเนื้อหาให้ครบถ้วน' : 'Please fill out all fields.');
+                return;
+            }
+
+            // 🟢 ดึงชื่อผู้ใช้ปัจจุบันจาก LocalStorage เพื่อนำมาเป็นชื่อคนตั้งกระทู้
+            let authorName = 'SouthVibes Member';
+            const savedProfile = localStorage.getItem("southvibes_profile");
+            const savedUser = localStorage.getItem("loggedInUser");
+            if (savedProfile) {
+                authorName = JSON.parse(savedProfile).name;
+            } else if (savedUser) {
+                authorName = JSON.parse(savedUser).username;
+            }
+
+            const newThread = {
+                id: Date.now(),
+                topic: { TH: topic, EN: topic },
+                content: { TH: content, EN: content },
+                author: authorName, 
+                time: { TH: 'เมื่อสักครู่', EN: 'Just now' },
+                category: { TH: categoryTH, EN: categoryEN },
+                comments: []
+            };
+
+            FORUM_THREADS.unshift(newThread);
+            
+            renderThreads();
+            closeNewThreadModal();
+        }
+
+        document.getElementById('btn-th').addEventListener('click', () => { currentLang = 'TH'; updateApp(); });
+        document.getElementById('btn-en').addEventListener('click', () => { currentLang = 'EN'; updateApp(); });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateApp();
+            checkLoginStatus(); // เรียกเช็คสถานะล็อกอินและโปรไฟล์
+        });
+    </script>
+</body>
+</html>
